@@ -163,7 +163,7 @@ body {
 	content: " ";
 }
 
-.twitter a:before{
+.twitter a:before {
 	content: " • ";
 }
 
