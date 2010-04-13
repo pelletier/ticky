@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+	    <title>Ticky</title>
+	    <link rel="stylesheet" href="media/css/master.css" type="text/css" media="screen"/>
+    </head>
+    <body>
+        <a href="http://github.com/kizlum/ticky"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
+        
+        
+        
+        <div class="header">
+            <div class="container">
+                <h1>Ticky</h1>
+                <div class="sub">
+                    When task management gets as <strong>cool</strong> as drinking coffee.
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">            
+            <div class="content">
+                
+                <div class="right">
+                    <p><img src="media/images/screenshot.png" atl=""/></p>
+                    <p><img src="media/images/mac.png" alt="OS X application"/></p>
+                </div>
+                
+                <div class="left">
+                    <p class="logo">
+                        <img src="media/images/coffee.png" alt="" height="125px"/>
+                    </p>
+            
+                    <p class="description">
+                        Ticky is a free, simple and unobtrusive application which helps you to manage your daily tasks.
+                    </p>
+                
+                    <div class="linksholder">
+                        <ul  class="links">
+                            <li><a href="http://github.com/downloads/kizlum/ticky/Ticky1.0.1.zip">Download</a> version 1.0.1.</li>
+                            <li>Repport <a href="http://github.com/kizlum/ticky/issues">issues</a> on github.</li>
+                            <li>Stay <a href="http://twitter.com/tickyapp/">tuned</a> on twitter.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="twitter">
+                <h5>News</h5>
+                <div id="twits">
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p>
+                    © 2009-2010 <a href="http://thomas.pelletier.im">Thomas Pelletier</a> • <a href="licence.html">Licence</a> • <a href="mailto:contact@ticky.im">Contact</a>
+                </p>
+            </div>
+        </div>
+        
+        <script src="media/js/jquery-1.4.2.js"></script>
+        <script src="media/js/jquery.twitter.js"></script>
+        
+        
+        <script type="text/javascript" >
+           $(document).ready(function(){
+           	   
+           	   $('#twits').getTwitter({
+           	       userName: 'tickyapp',
+           	       numTweets: 4,
+           	       loaderText: 'Loading news...',
+           	       slideIn: true,
+           	       showHeading: false,
+           	       showProfileLink: false,
+           	   });
+           	
+           });
+           
+        </script>
+    </body>
+</html>

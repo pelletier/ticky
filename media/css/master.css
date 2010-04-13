@@ -1,0 +1,185 @@
+body {
+	font-family: "Myriad Pro", "Lucida Grande", "Verdana", sans-serif;
+	padding: 0px;
+	margin: 0px;
+	background-color: #F6F6F6;
+	color: #555;
+}
+
+.container {
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+.header {
+	margin-top: 120px;
+	margin-bottom: 80px;
+	background-color: white;
+	min-height: 103px;
+	padding-top: 10px;
+	border-bottom: 1px solid #CCC;
+	border-top: 1px solid #CCC;
+}
+
+.header h1{
+	font-size: 80px;
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	margin-right: 50px;
+	color: #333;
+	text-shadow: #FFF 1px 1px 0px;
+}
+
+.header .sub {
+	font-size: 22px;
+	position: relative;
+	top: 23px;
+	color: #999;
+	text-shadow: #FFF 1px 1px;
+}
+
+.description {
+	text-align: justify;
+}
+
+.content {
+	clear: both;
+}
+
+.right {
+	float: right;
+	text-align: center;
+	display: block;
+	width: 265px;
+}
+
+.right p {
+	display: block;
+	text-align: center;
+}
+
+.left{
+	width: 265px;
+}
+
+.logo {
+	text-align: center;
+	padding-top: 30px;
+}
+
+.links a{
+	color: #333 ;
+	text-decoration: none;
+/*	text-shadow: #CCC 1px 1px;*/
+/*	text-shadow: #00CEFF 1px 1px;*/
+}
+
+.links a:hover{
+	text-decoration: underline;
+	color: #00CEFF;
+}
+
+.linksholder ul{
+	list-style: none outside;
+	padding: 1em;
+	margin: 0px;
+}
+
+.linksholder ul li{
+	padding: 0px;
+	margin: 0px;
+}
+
+.linksholder {
+	margin-top: 50px;
+	background-color: #FFF;
+	border: 4px solid #AAA;
+	padding: 1px;
+	color: #888;
+	border-radius: 5px;
+	font-size: 1.2em;
+}
+
+
+.footer p{
+	border-top: 1px solid #DDD;
+	padding-top: 15px;
+}
+
+.footer{
+	padding-top: 100px;
+	text-align: center;
+	clear: both;
+	color: #CCC;
+	text-shadow: #FFF 1px 1px;
+}
+
+.footer a{
+	color: #C8C8C8;
+}
+
+.footer a:hover{
+	color: #0099FF;
+}
+
+#twits {
+	font-size: 0.8em;
+}
+
+#twits li {
+
+}
+
+.twitter{
+	clear: both;
+	background-color: #CCC;
+/*	border: 2px solid #CCC;*/
+	padding: 4px;
+	margin-top: 160px;
+}
+
+.twitter ul{
+	margin: 0px;
+	padding: 0px;
+	list-style: none outside;
+}
+
+.twitter li{
+	background-color: #EFEFEF;
+	margin-bottom: 1px;
+	padding: 3px;
+}
+
+
+.twitter span a{
+	color: #888;
+	text-decoration: underline;
+}
+
+.twitter span a:before{
+	content: " ";
+}
+
+.twitter a:before{
+	content: " • ";
+}
+
+.twitter a{
+	color: #CCC;
+	text-decoration: none;
+}
+
+.twitter a:hover {
+		color: #00CEFF;
+}
+
+.twitter h5{
+	margin: 0px;
+	padding: 0px;
+	background-color: #FFF;
+	margin-bottom: 3px;
+	padding: 3px;
+}
