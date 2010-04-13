@@ -5,6 +5,23 @@
         <link>http://github.com/kizlum/ticky/raw/appcast/appcast.xml</link>
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
+
+        <item>
+            <title>Version 1.0.1</title>
+            <pubDate>Tue, 13 Apr 2010 17:11:00 +1000</pubDate>
+            <enclosure url="http://github.com/downloads/kizlum/ticky/Ticky1.0.1.zip" 
+                sparkle:version="1.0.1"
+                length="1016"
+                type="application/octet-stream"
+                sparkle:dsaSignature="MC0CFQDDD+fFTb5Iz2E+lCqWdRVzCYW5eQIUcTEe9J4StC5CDi847WJgZauoh64="/>        
+                
+            <description><![CDATA[
+                <ul>
+                    <li>Fix the search box position.</li>
+                </ul>
+            ]]></description>
+            <sparkle:minimumSystemVersion>10.5.1</sparkle:minimumSystemVersion>
+        </item>
         
         <item>
             <title>Version 1.0</title>
