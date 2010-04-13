@@ -15,7 +15,23 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		E9CD8DA5117488F3001F846E /* Ticky_ArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CD8DA4117488F3001F846E /* Ticky_ArrayController.m */; };
 		E9CD8DCF117495E7001F846E /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = E9CD8DCE117495E7001F846E /* icon.icns */; };
+		E9CD8ECE1174B2A0001F846E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CD8ECD1174B2A0001F846E /* Sparkle.framework */; };
+		E9CD8EDB1174B2D8001F846E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9CD8ECD1174B2A0001F846E /* Sparkle.framework */; };
+		E9CD8EE01174B4C4001F846E /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = E9CD8EDF1174B4C4001F846E /* dsa_pub.pem */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E9CD8EDA1174B2B7001F846E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E9CD8EDB1174B2D8001F846E /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -34,6 +50,8 @@
 		E9CD8DA3117488F3001F846E /* Ticky_ArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_ArrayController.h; sourceTree = "<group>"; };
 		E9CD8DA4117488F3001F846E /* Ticky_ArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticky_ArrayController.m; sourceTree = "<group>"; };
 		E9CD8DCE117495E7001F846E /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		E9CD8ECD1174B2A0001F846E /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		E9CD8EDF1174B4C4001F846E /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +60,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				E9CD8ECE1174B2A0001F846E /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +81,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E9CD8ECD1174B2A0001F846E /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -110,6 +130,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E9CD8EDF1174B4C4001F846E /* dsa_pub.pem */,
 				E9CD8DCE117495E7001F846E /* icon.icns */,
 				8D1107310486CEB800E47090 /* Ticky-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -142,8 +163,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 26FC0A840875C7B200E6366F /* Build configuration list for PBXNativeTarget "Ticky" */;
 			buildPhases = (
+				E9CD8EDA1174B2B7001F846E /* CopyFiles */,
 				8D1107290486CEB800E47090 /* Resources */,
-				E9CD8E621174AAC2001F846E /* Auto-versioning */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 			);
@@ -182,28 +203,11 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */,
 				E9CD8DCF117495E7001F846E /* icon.icns in Resources */,
+				E9CD8EE01174B4C4001F846E /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		E9CD8E621174AAC2001F846E /* Auto-versioning */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			comments = "http://www.stompy.org/2008/08/14/xcode-and-git-another-build-script/";
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Auto-versioning";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /usr/bin/perl;
-			shellScript = "use strict;\n \n# Get the current git commit hash and use it to set the CFBundleVersion value\n\nmy $REV = `cd $ENV{BUILT_PRODUCTS_DIR}/../ && /usr/local/git/bin/git show --abbrev-commit | grep \"^commit\"`;\nmy $INFO = \"$ENV{BUILT_PRODUCTS_DIR}/$ENV{WRAPPER_NAME}/Contents/Info.plist\";\n \nmy $version = $REV;\n\nif( $version =~ /^commit\\s+([^.]+)\\n$/ )\n{ \n\t$version = $1;\n}\nelse\n{\n\t$version = undef;\n}\ndie \"$0: No Git revision found\" unless $version;\n \nopen(FH, \"$INFO\") or die \"$0: $INFO: $!\";\nmy $info = join(\"\", <FH>);\nclose(FH);\n \n$info =~ s/([\\t ]+<key>CFBundleVersion<\\/key>\\n[\\t ]+<string>).*?(<\\/string>)/$1rev $version$2/;\n \nopen(FH, \">$INFO\") or die \"$0: $INFO: $!\";\nprint FH $info;\nclose(FH);";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D11072C0486CEB800E47090 /* Sources */ = {
@@ -244,6 +248,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -262,6 +270,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
