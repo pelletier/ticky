@@ -2,17 +2,19 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Ticky's Changelog</title>
-        <link>http://you.com/app/appcast.xml</link>
+        <link>http://github.com/kizlum/ticky/raw/appcast/appcast.xml</link>
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         
         <item>
-            <title>Version 2.0 (2 bugs fixed; 3 new features)</title>
-            <sparkle:releaseNotesLink>
-			    http://you.com/app/2.0.html
-			</sparkle:releaseNotesLink>
-            <pubDate>Wed, 09 Jan 2006 19:20:11 +0000</pubDate>
-            <enclosure url="http://you.com/app/Your Great App 2.0.zip" sparkle:version="2.0" length="1623481" type="application/octet-stream" sparkle:dsaSignature="BAFJW4B6B1K1JyW30nbkBwainOzrN6EQuAh" />
+            <title>Version 1.0</title>
+            <pubDate>Tue, 13 Apr 2010 16:52:11 +1000</pubDate>
+            <enclosure url="http://github.com/downloads/kizlum/ticky/Ticky1.0.zip" 
+                sparkle:version="1.0"
+                length="1016"
+                type="application/octet-stream"
+                sparkle:dsaSignature="MC4CFQCuYtf/HwZK0DaECAMyXDSXmhf+OwIVAKvC7EW9S4lMK3/MPAzaLOqmE35i" />        
+            <sparkle:minimumSystemVersion>10.5.1</sparkle:minimumSystemVersion>
         </item>
 
      </channel>
