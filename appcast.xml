@@ -7,6 +7,23 @@
         <language>en</language>
 
         <item>
+            <title>Version 1.0.2</title>
+            <pubDate>Mon, 19 Apr 2010 01:14:00 +1000</pubDate>
+            <enclosure url="http://github.com/downloads/kizlum/ticky/Ticky1.0.2.zip" 
+                sparkle:version="1.0.2"
+                length="1016"
+                type="application/octet-stream"
+                sparkle:dsaSignature="MC4CFQCMp8qKqFkC25tEoVXzZyuJ0rozfgIVAIQvKY2nNX5U/mZJZE902dAtXWmJ"/>        
+                
+            <description><![CDATA[
+                <ul>
+                    <li>Fix some memory leaks.</li>
+                </ul>
+            ]]></description>
+            <sparkle:minimumSystemVersion>10.5.1</sparkle:minimumSystemVersion>
+        </item>
+
+        <item>
             <title>Version 1.0.1</title>
             <pubDate>Tue, 13 Apr 2010 17:11:00 +1000</pubDate>
             <enclosure url="http://github.com/downloads/kizlum/ticky/Ticky1.0.1.zip" 
