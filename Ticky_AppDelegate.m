@@ -73,6 +73,18 @@
 
 
 /*
+ * Handle the Cmd+D mark current task as done event
+ */
+- (IBAction)markSelectedAsDone:(id)sender {
+	NSLog(@"%@",[[[[self tasksController] selectedObjects] lastObject] objectID]);
+	NSManagedObject *mo = [[self managedObjectContext] objectWithID:[[[[self tasksController] selectedObjects] lastObject] objectID]];
+	[mo setValue:[NSNumber numberWithInt:1] forKey:@"Done"];
+	
+	NSIndexSet * selSet = [NSIndexSet indexSetWithIndex:0];
+	[tableView selectRowIndexes:selSet byExtendingSelection:NO];
+}
+
+/*
  * Handle the "filter-on-type" event.
  */
 - (IBAction) filterTasks:(id)sender {

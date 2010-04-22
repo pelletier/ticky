@@ -35,6 +35,7 @@
 - (IBAction)saveAction:sender;
 - (IBAction)filterTasks:(id)sender;
 - (IBAction)addNewTask:(id)sender;
+- (IBAction)markSelectedAsDone:(id)sender;
 
 - (void)updateBadge;
    
