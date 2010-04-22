@@ -7,6 +7,30 @@
         <language>en</language>
 
         <item>
+            <title>Version 1.1</title>
+            <pubDate>Mon, 22 Apr 2010 17:39:00 +1000</pubDate>
+            <enclosure url="http://github.com/downloads/kizlum/ticky/Ticky1.1.zip" 
+                sparkle:version="1.1"
+                length="1752"
+                type="application/octet-stream"
+                sparkle:dsaSignature="MC0CFQCI+5kSfWbzP97MkyLGbG4+TdigUAIUQ66lsq6jwpSziK/KCuA1itTRgQI="/>        
+                
+            <description><![CDATA[
+                <h2>New features</h2>
+                <ul>
+                    <li>Add a new task with Cmd+N</li>
+                    <li>Mark the current selected task as read with Cmd+D</li>
+                </ul>
+                <h2>Bugfixes</h2>
+                <ul>
+                    <li>Fix the bad sync problem with the dock icon badge.</li>
+                </ul>
+            ]]></description>
+            <sparkle:minimumSystemVersion>10.5.1</sparkle:minimumSystemVersion>
+        </item>
+
+
+        <item>
             <title>Version 1.0.2</title>
             <pubDate>Mon, 19 Apr 2010 01:14:00 +1000</pubDate>
             <enclosure url="http://github.com/downloads/kizlum/ticky/Ticky1.0.2.zip" 
