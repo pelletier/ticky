@@ -13,22 +13,27 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		E9012E8B11805C7200BBDA60 /* Ticky_AddTaskPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9012E8A11805C7200BBDA60 /* Ticky_AddTaskPanel.m */; };
+		E91A497F11808DEC004C3557 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91A497E11808DEC004C3557 /* BWToolkitFramework.framework */; };
+		E91A498F11808E1B004C3557 /* BWToolkitFramework.framework in Copy 3rd party frameworks */ = {isa = PBXBuildFile; fileRef = E91A497E11808DEC004C3557 /* BWToolkitFramework.framework */; };
 		E9CD8DA5117488F3001F846E /* Ticky_ArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CD8DA4117488F3001F846E /* Ticky_ArrayController.m */; };
 		E9CD8DCF117495E7001F846E /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = E9CD8DCE117495E7001F846E /* icon.icns */; };
 		E9CD8ECE1174B2A0001F846E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CD8ECD1174B2A0001F846E /* Sparkle.framework */; };
-		E9CD8EDB1174B2D8001F846E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E9CD8ECD1174B2A0001F846E /* Sparkle.framework */; };
+		E9CD8EDB1174B2D8001F846E /* Sparkle.framework in Copy 3rd party frameworks */ = {isa = PBXBuildFile; fileRef = E9CD8ECD1174B2A0001F846E /* Sparkle.framework */; };
 		E9CD8EE01174B4C4001F846E /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = E9CD8EDF1174B4C4001F846E /* dsa_pub.pem */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E9CD8EDA1174B2B7001F846E /* CopyFiles */ = {
+		E9CD8EDA1174B2B7001F846E /* Copy 3rd party frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E9CD8EDB1174B2D8001F846E /* Sparkle.framework in CopyFiles */,
+				E91A498F11808E1B004C3557 /* BWToolkitFramework.framework in Copy 3rd party frameworks */,
+				E9CD8EDB1174B2D8001F846E /* Sparkle.framework in Copy 3rd party frameworks */,
 			);
+			name = "Copy 3rd party frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -47,6 +52,9 @@
 		77C8280C06725ACE000B614F /* Ticky_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticky_AppDelegate.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Ticky-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "Ticky-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Ticky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ticky.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9012E8911805C7200BBDA60 /* Ticky_AddTaskPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_AddTaskPanel.h; sourceTree = "<group>"; };
+		E9012E8A11805C7200BBDA60 /* Ticky_AddTaskPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticky_AddTaskPanel.m; sourceTree = "<group>"; };
+		E91A497E11808DEC004C3557 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = /Users/thomas/Downloads/BWToolkit/BWToolkitFramework.framework; sourceTree = "<absolute>"; };
 		E9CD8DA3117488F3001F846E /* Ticky_ArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_ArrayController.h; sourceTree = "<group>"; };
 		E9CD8DA4117488F3001F846E /* Ticky_ArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticky_ArrayController.m; sourceTree = "<group>"; };
 		E9CD8DCE117495E7001F846E /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
@@ -61,6 +69,7 @@
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				E9CD8ECE1174B2A0001F846E /* Sparkle.framework in Frameworks */,
+				E91A497F11808DEC004C3557 /* BWToolkitFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +83,8 @@
 				77C8280C06725ACE000B614F /* Ticky_AppDelegate.m */,
 				E9CD8DA3117488F3001F846E /* Ticky_ArrayController.h */,
 				E9CD8DA4117488F3001F846E /* Ticky_ArrayController.m */,
+				E9012E8911805C7200BBDA60 /* Ticky_AddTaskPanel.h */,
+				E9012E8A11805C7200BBDA60 /* Ticky_AddTaskPanel.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -83,6 +94,7 @@
 			children = (
 				E9CD8ECD1174B2A0001F846E /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				E91A497E11808DEC004C3557 /* BWToolkitFramework.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -163,7 +175,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 26FC0A840875C7B200E6366F /* Build configuration list for PBXNativeTarget "Ticky" */;
 			buildPhases = (
-				E9CD8EDA1174B2B7001F846E /* CopyFiles */,
+				E9CD8EDA1174B2B7001F846E /* Copy 3rd party frameworks */,
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
@@ -218,6 +230,7 @@
 				77C8280E06725ACE000B614F /* Ticky_AppDelegate.m in Sources */,
 				770B37ED0679A11B001EADE2 /* Ticky_DataModel.xcdatamodel in Sources */,
 				E9CD8DA5117488F3001F846E /* Ticky_ArrayController.m in Sources */,
+				E9012E8B11805C7200BBDA60 /* Ticky_AddTaskPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +264,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../../Downloads/BWToolkit\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -273,6 +287,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../../Downloads/BWToolkit\"",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;

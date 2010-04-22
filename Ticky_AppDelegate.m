@@ -11,30 +11,109 @@
 @implementation Ticky_AppDelegate
 
 @synthesize window;
+@synthesize addTaskPanel;
+@synthesize tableView;
+@synthesize tasksController;
+
+
+#pragma mark -
+#pragma mark Initialize and desktroy
 
 - (void)awakeFromNib {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(objectsDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:[self managedObjectContext]];
 	[tasksController addObserver:self forKeyPath:@"arrangedObjects" options:0 context:NULL];
 }
 
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:
-								(id)object change:
-								(NSDictionary *)change context:
-								(void *)context
-{
-	NSPredicate *bPredicate = [NSPredicate predicateWithFormat:@"(Done == NO)"];
-	NSArray *filtered = [[tasksController arrangedObjects] filteredArrayUsingPredicate:bPredicate];
+
+- (void)dealloc {
 	
-	int nbr = [filtered count];
-	
-	NSDockTile *tile = [[NSApplication sharedApplication] dockTile];
-	[tile setBadgeLabel:[NSString stringWithFormat:@"%d", nbr]];
+    [window release];
+	[addTaskPanel release];
+	[tableView release];
+    [managedObjectContext release];
+    [persistentStoreCoordinator release];
+    [managedObjectModel release];
+	[tasksController removeObserver:self forKeyPath:@"arrangedObjects"];
+    [super dealloc];
 }
 
+
+
+#pragma mark -
+#pragma mark Events callbacks
+
+
+/*
+ * Observe changes on tasksController
+ */
+- (void)observeValueForKeyPath:(NSString *)keyPath
+					  ofObject:(id)object
+						change:(NSDictionary *)change
+					   context:(void *)context
+{
+	[self updateBadge];
+}
+
+
+/*
+ * Be sure tasksController is always synchronized with Core Data
+ */
 - (void)objectsDidChange:(NSNotification *)note
 {
 	[tasksController rearrangeObjects];
 }
+
+
+/*
+ * Handle the Cmd+N new task event
+ */
+- (IBAction)addNewTask:(id)sender {
+	[addTaskPanel makeKeyAndOrderFront:self];
+}
+
+
+/*
+ * Handle the "filter-on-type" event.
+ */
+- (IBAction) filterTasks:(id)sender {
+	NSMutableString *searchText = [NSMutableString stringWithString:[searchField stringValue]];
+	
+	// Remove extraenous whitespace
+	while ([searchText rangeOfString:@"Â  "].location != NSNotFound) {
+		[searchText replaceOccurrencesOfString:@"Â  " withString:@" " options:0 range:NSMakeRange(0, [searchText length])];
+	}
+	
+	//Remove leading space
+	if ([searchText length] != 0) [searchText replaceOccurrencesOfString:@" " withString:@"" options:0 range:NSMakeRange(0,1)];
+	
+	//Remove trailing space
+	if ([searchText length] != 0) [searchText replaceOccurrencesOfString:@" " withString:@"" options:0 range:NSMakeRange([searchText length]-1, 1)];
+	
+	if ([searchText length] == 0) {
+		[tasksController setFilterPredicate:nil];
+		return;
+	}
+	
+	NSArray *searchTerms = [searchText componentsSeparatedByString:@" "];
+	
+	if ([searchTerms count] == 1) {
+		NSPredicate *p = [NSPredicate predicateWithFormat:@"(Content contains[cd] %@)", searchText];
+		[tasksController setFilterPredicate:p];
+	} else {
+		NSMutableArray *subPredicates = [[NSMutableArray alloc] init];
+		for (NSString *term in searchTerms) {
+			NSPredicate *p = [NSPredicate predicateWithFormat:@"(Content contains[cd] %@)", term];
+			[subPredicates addObject:p];
+		}
+		NSPredicate *cp = [NSCompoundPredicate andPredicateWithSubpredicates:subPredicates];
+		
+		[tasksController setFilterPredicate:cp];
+	}
+}
+
+
+#pragma mark -
+#pragma mark Subclassed methods
 
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication
@@ -45,6 +124,29 @@
 	
 	return YES;
 }
+
+- (void)updateBadge {
+	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:[self managedObjectContext]];
+	NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+	[request setEntity:entityDescription];
+	
+	NSPredicate *bPredicate = [NSPredicate predicateWithFormat:@"(Done != YES)"];
+	[request setPredicate:bPredicate];
+	
+	NSError *error;
+	NSArray *filtered = [managedObjectContext executeFetchRequest:request error:&error];
+	
+	int nbr = [filtered count];
+	
+	NSDockTile *tile = [[NSApplication sharedApplication] dockTile];
+	[tile setBadgeLabel:[NSString stringWithFormat:@"%d", nbr]];
+}
+
+
+
+
+#pragma mark -
+#pragma mark Core Data implementation
 
 /**
     Returns the support directory for the application, used to store the Core Data
@@ -226,59 +328,5 @@
 
     return NSTerminateNow;
 }
-
-
-/**
-    Implementation of dealloc, to release the retained variables.
- */
- 
-- (void)dealloc {
-
-    [window release];
-    [managedObjectContext release];
-    [persistentStoreCoordinator release];
-    [managedObjectModel release];
-	[tasksController removeObserver:self forKeyPath:@"arrangedObjects"];
-    [super dealloc];
-}
-
-
-
-- (IBAction) filterTasks:(id)sender {
-	NSMutableString *searchText = [NSMutableString stringWithString:[searchField stringValue]];
-	
-	// Remove extraenous whitespace
-	while ([searchText rangeOfString:@"Â  "].location != NSNotFound) {
-		[searchText replaceOccurrencesOfString:@"Â  " withString:@" " options:0 range:NSMakeRange(0, [searchText length])];
-	}
-	
-	//Remove leading space
-	if ([searchText length] != 0) [searchText replaceOccurrencesOfString:@" " withString:@"" options:0 range:NSMakeRange(0,1)];
-	
-	//Remove trailing space
-	if ([searchText length] != 0) [searchText replaceOccurrencesOfString:@" " withString:@"" options:0 range:NSMakeRange([searchText length]-1, 1)];
-	
-	if ([searchText length] == 0) {
-		[tasksController setFilterPredicate:nil];
-		return;
-	}
-	
-	NSArray *searchTerms = [searchText componentsSeparatedByString:@" "];
-	
-	if ([searchTerms count] == 1) {
-		NSPredicate *p = [NSPredicate predicateWithFormat:@"(Content contains[cd] %@)", searchText];
-		[tasksController setFilterPredicate:p];
-	} else {
-		NSMutableArray *subPredicates = [[NSMutableArray alloc] init];
-		for (NSString *term in searchTerms) {
-			NSPredicate *p = [NSPredicate predicateWithFormat:@"(Content contains[cd] %@)", term];
-			[subPredicates addObject:p];
-		}
-		NSPredicate *cp = [NSCompoundPredicate andPredicateWithSubpredicates:subPredicates];
-		
-		[tasksController setFilterPredicate:cp];
-	}
-}
-
 
 @end
