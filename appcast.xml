@@ -10,9 +10,10 @@
             <title>Version 1.1</title>
             <pubDate>Mon, 22 Apr 2010 17:39:00 +1000</pubDate>
             <enclosure url="http://github.com/downloads/kizlum/ticky/Ticky1.1.zip" 
-                sparkle:version="1.1.0"
+                sparkle:version="110"
+                sparkle:shortVersionString="1.1.0"
                 length="1752"
-                type="application/octet-stream"
+                type="application/octet-stream" 
                 sparkle:dsaSignature="MC0CFQCI+5kSfWbzP97MkyLGbG4+TdigUAIUQ66lsq6jwpSziK/KCuA1itTRgQI="/>        
                 
             <description><![CDATA[
