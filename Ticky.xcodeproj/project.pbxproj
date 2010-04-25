@@ -175,6 +175,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 26FC0A840875C7B200E6366F /* Build configuration list for PBXNativeTarget "Ticky" */;
 			buildPhases = (
+				E9D3AC9C118313940088F47D /* Update version number */,
 				E9CD8EDA1174B2B7001F846E /* Copy 3rd party frameworks */,
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
@@ -220,6 +221,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E9D3AC9C118313940088F47D /* Update version number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update version number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/python;
+			shellScript = "from os import environ\nfrom os import path\nfrom git import *\nfrom plistlib import *\n\nrepo = Repo(environ['PROJECT_DIR'])\nshort = str(repo.tags[0])\nversion = short.replace('.', '')\n\nplist_path = path.join(environ['PROJECT_DIR'], \"%s-Info.plist\" % environ['PROJECT_NAME'])\n\npl = readPlist(plist_path)\n\npl['CFBundleVersion'] = version\npl['CFBundleShortVersionString'] = short\n\nwritePlist(pl, plist_path)\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D11072C0486CEB800E47090 /* Sources */ = {

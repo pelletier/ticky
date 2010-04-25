@@ -22,7 +22,7 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="572"/>
-			<integer value="21"/>
+			<integer value="2"/>
 			<integer value="81"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -562,9 +562,9 @@
 									<reference key="NSOnImage" ref="893455832"/>
 									<reference key="NSMixedImage" ref="424226900"/>
 								</object>
-								<object class="NSMenuItem" id="449143015">
+								<object class="NSMenuItem" id="937848943">
 									<reference key="NSMenu" ref="960517776"/>
-									<string key="NSTitle">Mark as done</string>
+									<string key="NSTitle">Toggle the task</string>
 									<string key="NSKeyEquiv">d</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -2246,14 +2246,6 @@
 					<int key="connectionID">544</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">add:</string>
-						<reference key="source" ref="45501113"/>
-						<reference key="destination" ref="718760333"/>
-					</object>
-					<int key="connectionID">545</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">tasksController</string>
 						<reference key="source" ref="576090601"/>
@@ -2361,9 +2353,17 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">markSelectedAsDone:</string>
 						<reference key="source" ref="612578685"/>
-						<reference key="destination" ref="449143015"/>
+						<reference key="destination" ref="937848943"/>
 					</object>
 					<int key="connectionID">584</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">addNewTask:</string>
+						<reference key="source" ref="612578685"/>
+						<reference key="destination" ref="718760333"/>
+					</object>
+					<int key="connectionID">585</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2409,9 +2409,9 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="424405258"/>
-							<reference ref="718760333"/>
 							<reference ref="262699507"/>
 							<reference ref="308673589"/>
+							<reference ref="718760333"/>
 						</object>
 						<reference key="parent" ref="483958638"/>
 					</object>
@@ -2543,7 +2543,7 @@
 							<reference ref="620705007"/>
 							<reference ref="51940822"/>
 							<reference ref="979494085"/>
-							<reference ref="449143015"/>
+							<reference ref="937848943"/>
 						</object>
 						<reference key="parent" ref="842783111"/>
 					</object>
@@ -3470,7 +3470,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">583</int>
-						<reference key="object" ref="449143015"/>
+						<reference key="object" ref="937848943"/>
 						<reference key="parent" ref="960517776"/>
 					</object>
 				</object>
@@ -3897,7 +3897,7 @@
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{483, 609}, {182, 113}}</string>
+					<string>{{483, 609}, {196, 113}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3920,7 +3920,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">584</int>
+			<int key="maxID">585</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

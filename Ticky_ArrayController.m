@@ -16,4 +16,10 @@
 	[tasksController setSortDescriptors:[NSArray arrayWithObject:descriptor]];
 	[descriptor release];	
 }
+
+- (void) dealloc{
+	[tasksController release];
+	[super dealloc];
+}
+
 @end

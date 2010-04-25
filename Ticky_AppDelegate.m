@@ -78,7 +78,21 @@
 - (IBAction)markSelectedAsDone:(id)sender {
 	NSLog(@"%@",[[[[self tasksController] selectedObjects] lastObject] objectID]);
 	NSManagedObject *mo = [[self managedObjectContext] objectWithID:[[[[self tasksController] selectedObjects] lastObject] objectID]];
-	[mo setValue:[NSNumber numberWithInt:1] forKey:@"Done"];
+	
+	NSNumber *current = [mo valueForKey:@"Done"];
+	
+	if (current == nil) {
+		[mo setValue:[NSNumber numberWithInt:1] forKey:@"Done"];
+	}
+	else {
+		if ([current isEqualToNumber:[NSNumber numberWithInt:0]]) {
+			[mo setValue:[NSNumber numberWithInt:1] forKey:@"Done"];
+		}
+		else {
+			[mo setValue:[NSNumber numberWithInt:0] forKey:@"Done"];
+		}
+
+	}
 	
 	NSIndexSet * selSet = [NSIndexSet indexSetWithIndex:0];
 	[tableView selectRowIndexes:selSet byExtendingSelection:NO];
@@ -120,6 +134,7 @@
 		NSPredicate *cp = [NSCompoundPredicate andPredicateWithSubpredicates:subPredicates];
 		
 		[tasksController setFilterPredicate:cp];
+		[subPredicates release];
 	}
 }
 
