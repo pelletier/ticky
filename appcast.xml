@@ -7,6 +7,31 @@
         <language>en</language>
 
         <item>
+            <title>Version 1.1.1</title>
+            <pubDate>Sun, 25 Apr 2010 10:29:00 +1000</pubDate>
+            <enclosure url="http://github.com/downloads/kizlum/ticky/Ticky1.1.1.zip" 
+                sparkle:version="111"
+                sparkle:shortVersionString="1.1.1"
+                length="1752"
+                type="application/octet-stream" 
+                sparkle:dsaSignature="MC0CFQDSBIzw1iQBQIeC37ro2I+Na9K1ZAIURfstDk6aiPTeCd3m/dugwrFDizY="/>        
+                
+            <description><![CDATA[
+                <h2>New features</h2>
+                <ul>
+                    <li>Cmd+D now toggles the current task (mark as done if not and as todo if done).</li>
+                </ul>
+                <h2>Bugfixes</h2>
+                <ul>
+                    <li>The "+" button now opens the "new task" window.</li>
+                    <li>Fixed some memory leaks / RAM improvement.</li>
+                </ul>
+            ]]></description>
+            <sparkle:minimumSystemVersion>10.5.1</sparkle:minimumSystemVersion>
+        </item>
+
+
+        <item>
             <title>Version 1.1</title>
             <pubDate>Mon, 22 Apr 2010 17:39:00 +1000</pubDate>
             <enclosure url="http://github.com/downloads/kizlum/ticky/Ticky1.1.zip" 
