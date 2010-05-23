@@ -42,7 +42,7 @@
 #pragma mark TableView drag and drop
 
 /* Fix something there */
-
+/* Now the new feature is ready */
 
 #pragma mark -
 #pragma mark Events callbacks
