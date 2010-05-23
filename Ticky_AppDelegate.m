@@ -3,10 +3,11 @@
 //  Ticky
 //
 //  Created by Thomas PELLETIER on 13/04/10.
-//  Copyright __MyCompanyName__ 2010 . All rights reserved.
+//  Copyright Thomas PELLETIER 2010 . All rights reserved.
 //
 
 #import "Ticky_AppDelegate.h"
+
 
 @implementation Ticky_AppDelegate
 
@@ -37,6 +38,9 @@
     [super dealloc];
 }
 
+#pragma mark -
+#pragma mark TableView drag and drop
+
 
 
 #pragma mark -
@@ -58,11 +62,17 @@
 /*
  * Be sure tasksController is always synchronized with Core Data
  */
-- (void)objectsDidChange:(NSNotification *)note
-{
+- (void)objectsDidChange:(NSNotification *)note {
 	[tasksController rearrangeObjects];
 }
 
+
+/*
+ * Open the Feedback page
+ */
+- (void)openFeedback:(id)sender {
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://feedback.ticky.im/"]];
+}
 
 /*
  * Handle the Cmd+N new task event
@@ -152,7 +162,7 @@
 	return YES;
 }
 
-- (void)updateBadge {
+- (id)updateBadge {
 	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:[self managedObjectContext]];
 	NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
 	[request setEntity:entityDescription];
@@ -167,6 +177,7 @@
 	
 	NSDockTile *tile = [[NSApplication sharedApplication] dockTile];
 	[tile setBadgeLabel:[NSString stringWithFormat:@"%d", nbr]];
+	return self;
 }
 
 

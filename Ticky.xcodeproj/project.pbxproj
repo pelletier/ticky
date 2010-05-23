@@ -16,6 +16,7 @@
 		E9012E8B11805C7200BBDA60 /* Ticky_AddTaskPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9012E8A11805C7200BBDA60 /* Ticky_AddTaskPanel.m */; };
 		E91A497F11808DEC004C3557 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91A497E11808DEC004C3557 /* BWToolkitFramework.framework */; };
 		E91A498F11808E1B004C3557 /* BWToolkitFramework.framework in Copy 3rd party frameworks */ = {isa = PBXBuildFile; fileRef = E91A497E11808DEC004C3557 /* BWToolkitFramework.framework */; };
+		E950C08D1184872F003EEB33 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = E950C08C1184872F003EEB33 /* Task.m */; };
 		E9CD8DA5117488F3001F846E /* Ticky_ArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CD8DA4117488F3001F846E /* Ticky_ArrayController.m */; };
 		E9CD8DCF117495E7001F846E /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = E9CD8DCE117495E7001F846E /* icon.icns */; };
 		E9CD8ECE1174B2A0001F846E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CD8ECD1174B2A0001F846E /* Sparkle.framework */; };
@@ -55,6 +56,8 @@
 		E9012E8911805C7200BBDA60 /* Ticky_AddTaskPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_AddTaskPanel.h; sourceTree = "<group>"; };
 		E9012E8A11805C7200BBDA60 /* Ticky_AddTaskPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticky_AddTaskPanel.m; sourceTree = "<group>"; };
 		E91A497E11808DEC004C3557 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = /Users/thomas/Downloads/BWToolkit/BWToolkitFramework.framework; sourceTree = "<absolute>"; };
+		E950C08B1184872F003EEB33 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		E950C08C1184872F003EEB33 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
 		E9CD8DA3117488F3001F846E /* Ticky_ArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_ArrayController.h; sourceTree = "<group>"; };
 		E9CD8DA4117488F3001F846E /* Ticky_ArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticky_ArrayController.m; sourceTree = "<group>"; };
 		E9CD8DCE117495E7001F846E /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
@@ -163,6 +166,8 @@
 		7756732906782D8800D1FEB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E950C08B1184872F003EEB33 /* Task.h */,
+				E950C08C1184872F003EEB33 /* Task.m */,
 				770B37EC0679A11B001EADE2 /* Ticky_DataModel.xcdatamodel */,
 			);
 			name = Models;
@@ -235,7 +240,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /usr/bin/python;
-			shellScript = "from os import environ\nfrom os import path\nfrom git import *\nfrom plistlib import *\n\nrepo = Repo(environ['PROJECT_DIR'])\nshort = str(repo.tags[0])\nversion = short.replace('.', '')\n\nplist_path = path.join(environ['PROJECT_DIR'], \"%s-Info.plist\" % environ['PROJECT_NAME'])\n\npl = readPlist(plist_path)\n\npl['CFBundleVersion'] = version\npl['CFBundleShortVersionString'] = short\n\nwritePlist(pl, plist_path)\n";
+			shellScript = "from os import environ\nfrom os import path\nfrom git import *\nfrom plistlib import *\n\nrepo = Repo(environ['PROJECT_DIR'])\n\nshort = \"0\"\nversion = \"0\"\n\nfor tag in repo.tags:\n    tag = str(tag)\n    tag = tag.replace('v', '')\n    cmpval = int(tag.replace('.', ''))\n    if cmpval > int(version):\n        short = tag\n        version = tag.replace('.', '')\n\nplist_path = path.join(environ['PROJECT_DIR'], \"%s-Info.plist\" % environ['PROJECT_NAME'])\n\npl = readPlist(plist_path)\n\npl['CFBundleVersion'] = version\npl['CFBundleShortVersionString'] = short\n\nwritePlist(pl, plist_path)\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -249,6 +254,7 @@
 				770B37ED0679A11B001EADE2 /* Ticky_DataModel.xcdatamodel in Sources */,
 				E9CD8DA5117488F3001F846E /* Ticky_ArrayController.m in Sources */,
 				E9012E8B11805C7200BBDA60 /* Ticky_AddTaskPanel.m in Sources */,
+				E950C08D1184872F003EEB33 /* Task.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,10 +329,16 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx10.5;
 			};
 			name = Debug;
@@ -336,6 +348,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;

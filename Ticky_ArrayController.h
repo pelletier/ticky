@@ -3,7 +3,7 @@
 //  Ticky
 //
 //  Created by Thomas PELLETIER on 13/04/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Thomas PELLETIER. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
