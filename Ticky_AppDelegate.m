@@ -56,6 +56,7 @@
 						change:(NSDictionary *)change
 					   context:(void *)context
 {
+	/* Fix a major bug here */
 	[self updateBadge];
 }
 
