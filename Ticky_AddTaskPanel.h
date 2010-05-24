@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "Ticky_Globals.h"
 
 @interface Ticky_AddTaskPanel : NSPanel{
 	

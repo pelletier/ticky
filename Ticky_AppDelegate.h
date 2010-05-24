@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Ticky_AddTaskPanel.h"
+#import "Ticky_Globals.h"
 
 @interface Ticky_AppDelegate : NSObject 
 {
@@ -17,6 +18,7 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
+	NSArray *_sortDescriptors;
 	
 	IBOutlet NSArrayController *tasksController;
 	IBOutlet NSSearchField *searchField;
@@ -32,12 +34,27 @@
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 
+//@property (nonatomic, retain, readonly) NSArray *sortDescriptors;
+
 - (IBAction)saveAction:sender;
 - (IBAction)filterTasks:(id)sender;
 - (IBAction)addNewTask:(id)sender;
+- (IBAction)removeSelectedTasks:(id)sender;
 - (IBAction)markSelectedAsDone:(id)sender;
 - (IBAction)openFeedback:(id)sender;
 
 - (id)updateBadge;
-   
+
+
+/* Drag and Drop / Reordering helpers */
+- (NSArray *)itemsUsingFetchPredicate:(NSPredicate *)fetchPredicate;
+- (NSArray *)itemsWithViewPosition:(int)value;
+- (NSArray *)itemsWithNonTemporaryViewPosition;
+- (NSArray *)itemsWithViewPositionGreaterThanOrEqualTo:(int)value;
+- (NSArray *)itemsWithViewPositionBetween:(int)lowValue and:(int)highValue;
+- (int)renumberViewPositionsOfItems:(NSArray *)array startingAt:(int)value;
+- (void)renumberViewPositions;
+
+- (NSArray *)sortDescriptors;
+
 @end

@@ -19,8 +19,11 @@
 	NSManagedObject *newTask = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:[[NSApp delegate] managedObjectContext]];
 	[newTask setValue:newtaskContent forKey:@"Content"];
 	[newTask setValue:NO forKey:@"Done"];
+	[newTask setValue:endViewPositionNum forKey:@"Order"];
 	[self orderOut:self];
 	[[NSApp delegate] updateBadge];
+	NSLog(@"Hal");
+	[[NSApp delegate] renumberViewPositions];
 }
 
 @end

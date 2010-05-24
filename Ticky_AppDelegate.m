@@ -15,19 +15,118 @@
 @synthesize addTaskPanel;
 @synthesize tableView;
 @synthesize tasksController;
+//@synthesize sortDescriptors;
+
+
+NSString *DemoItemsDropType = @"TickyTasksDropType";
+
+- (NSArray *)sortDescriptors
+{
+	if( _sortDescriptors == nil )
+	{
+		_sortDescriptors = [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"Order" ascending:YES]];
+	}
+	return _sortDescriptors;
+}
+
+
+- (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pasteboard
+{
+	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
+	[pasteboard declareTypes:[NSArray arrayWithObject:DemoItemsDropType] owner:self];
+	[pasteboard setData:data forType:DemoItemsDropType];
+	return YES;
+}
+
+
+- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id  <NSDraggingInfo>)info proposedRow:(int)row proposedDropOperation:(NSTableViewDropOperation)operation
+{
+	if( [info draggingSource] == tableView )
+	{
+		if( operation == NSTableViewDropOn )
+			[tv setDropRow:row dropOperation:NSTableViewDropAbove];
+		
+		return NSDragOperationMove;
+	}
+	else
+	{
+		return NSDragOperationNone;
+	}
+}
+
+- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info row:(int)row dropOperation:(NSTableViewDropOperation)operation
+{
+	NSPasteboard *pasteboard = [info draggingPasteboard];
+	NSData *rowData = [pasteboard dataForType:DemoItemsDropType];
+	NSIndexSet *rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
+	
+	NSArray *allItemsArray = [tasksController arrangedObjects];
+	NSMutableArray *draggedItemsArray = [NSMutableArray arrayWithCapacity:[rowIndexes count]];
+	
+	//unsigned int currentItemIndex;
+	NSUInteger currentItemIndex = 0;
+	NSRange range = NSMakeRange( 0, [rowIndexes lastIndex] + 1 );
+	NSLog(@"Blah");
+	while([rowIndexes getIndexes:&currentItemIndex maxCount:1 inIndexRange:&range] > 0)
+	{
+		NSLog(@"inside");
+		NSManagedObject *thisItem = [allItemsArray objectAtIndex:currentItemIndex];
+		
+		[draggedItemsArray addObject:thisItem];
+	}
+	NSLog(@"OUT");
+	
+	int count;
+	for( count = 0; count < [draggedItemsArray count]; count++ )
+	{
+		NSManagedObject *currentItemToMove = [draggedItemsArray objectAtIndex:count];
+		[currentItemToMove setValue:temporaryViewPositionNum forKey:@"Order"];
+	}
+	
+	int tempRow;
+	if( row == 0 )
+		tempRow = -1;
+	else
+		tempRow = row;
+	
+	NSArray *startItemsArray = [self itemsWithViewPositionBetween:0 and:tempRow];
+	NSArray *endItemsArray = [self itemsWithViewPositionGreaterThanOrEqualTo:row];
+	
+	int currentViewPosition;
+	
+	currentViewPosition = [self renumberViewPositionsOfItems:startItemsArray startingAt:0];
+	
+	currentViewPosition = [self renumberViewPositionsOfItems:draggedItemsArray startingAt:currentViewPosition];
+	
+	currentViewPosition = [self renumberViewPositionsOfItems:endItemsArray startingAt:currentViewPosition];
+	
+	return YES;
+}
 
 
 #pragma mark -
 #pragma mark Initialize and desktroy
 
+-(id) init {
+	//sortDescriptors = [NSArray alloc];
+	
+	return self;
+}
+
 - (void)awakeFromNib {
+	NSLog(@"Awake from nib");
+//	NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"Order" ascending:YES];
+//	sortDescriptors = [NSArray arrayWithObject:sort];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(objectsDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:[self managedObjectContext]];
 	[tasksController addObserver:self forKeyPath:@"arrangedObjects" options:0 context:NULL];
+	NSLog(@"End of awake from nnib");
+	[tableView setDataSource:self];
+	[tableView registerForDraggedTypes:[NSArray arrayWithObjects:DemoItemsDropType, nil]];
 }
 
 
 - (void)dealloc {
-	
+	[_sortDescriptors release];
     [window release];
 	[addTaskPanel release];
 	[tableView release];
@@ -38,14 +137,111 @@
     [super dealloc];
 }
 
+
 #pragma mark -
 #pragma mark TableView drag and drop
 
-/* Fix something there */
-/* Now the new feature is ready */
+- (NSArray *)itemsUsingFetchPredicate:(NSPredicate *)fetchPredicate
+{
+	NSError *error = nil;
+	NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:[self managedObjectContext]];
+	
+	NSArray *arrayOfItems;
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	[fetchRequest setEntity:entityDesc];
+	[fetchRequest setPredicate:fetchPredicate];
+	[fetchRequest setSortDescriptors:[self sortDescriptors]];
+	arrayOfItems = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+	[fetchRequest release];
+	
+	return arrayOfItems;
+}
+
+- (NSArray *)itemsWithViewPosition:(int)value
+{
+	NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"Order == %i", value];
+	
+	return [self itemsUsingFetchPredicate:fetchPredicate];
+}
+
+- (NSArray *)itemsWithNonTemporaryViewPosition
+{
+	NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"Order >= 0"];
+	
+	return [self itemsUsingFetchPredicate:fetchPredicate];
+}
+
+- (NSArray *)itemsWithViewPositionGreaterThanOrEqualTo:(int)value
+{
+	NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"Order >= %i", value];
+	
+	return [self itemsUsingFetchPredicate:fetchPredicate];
+}
+
+- (NSArray *)itemsWithViewPositionBetween:(int)lowValue and:(int)highValue
+{
+	NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"Order >= %i && Order <= %i", lowValue, highValue];
+	
+	return [self itemsUsingFetchPredicate:fetchPredicate];
+}
+
+- (int)renumberViewPositionsOfItems:(NSArray *)array startingAt:(int)value
+{
+	int currentViewPosition = value;
+	
+	int count = 0;
+	
+	if( array && ([array count] > 0) )
+	{
+		for( count = 0; count < [array count]; count++ )
+		{
+			NSManagedObject *currentObject = [array objectAtIndex:count];
+			[currentObject setValue:[NSNumber numberWithInt:currentViewPosition] forKey:@"Order"];
+			currentViewPosition++;
+		}
+	}
+	
+	return currentViewPosition;
+}
+
+- (void)renumberViewPositions {
+	NSLog(@"Start renumbering");
+	NSArray *startItems = [self itemsWithViewPosition:[startViewPositionNum intValue]];
+	
+	NSArray *existingItems = [self itemsWithNonTemporaryViewPosition];
+	
+	NSArray *endItems = [self itemsWithViewPosition:[endViewPositionNum intValue]];
+	
+	int currentViewPosition = 0;
+	
+	if( startItems && ([startItems count] > 0) )
+		currentViewPosition = [self renumberViewPositionsOfItems:startItems startingAt:currentViewPosition];
+	
+	if( existingItems && ([existingItems count] > 0) )
+		currentViewPosition = [self renumberViewPositionsOfItems:existingItems startingAt:currentViewPosition];
+	
+	if( endItems && ([endItems count] > 0) )
+		currentViewPosition = [self renumberViewPositionsOfItems:endItems startingAt:currentViewPosition];
+}
 
 #pragma mark -
 #pragma mark Events callbacks
+
+
+/*
+ * Remove the table selected task
+ */
+- (IBAction)removeSelectedTasks:(id)sender {
+	NSArray *selectedItems = [tasksController selectedObjects];
+	
+	int count;
+	for( count = 0; count < [selectedItems count]; count ++ )
+	{
+		NSManagedObject *currentObject = [selectedItems objectAtIndex:count];
+		[[self managedObjectContext] deleteObject:currentObject];
+	}
+	[self renumberViewPositions];
+}
 
 
 /*
@@ -56,7 +252,6 @@
 						change:(NSDictionary *)change
 					   context:(void *)context
 {
-	/* Fix a major bug here */
 	[self updateBadge];
 }
 

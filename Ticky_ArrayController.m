@@ -12,9 +12,9 @@
 @implementation Ticky_ArrayController
 
 - (void)awakeFromNib {
-	NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"Done" ascending:YES];
+/*	NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"Done" ascending:YES];
 	[tasksController setSortDescriptors:[NSArray arrayWithObject:descriptor]];
-	[descriptor release];	
+	[descriptor release];	*/
 }
 
 - (void) dealloc{

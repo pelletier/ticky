@@ -59,6 +59,7 @@
 		E91A497E11808DEC004C3557 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = /Users/thomas/Downloads/BWToolkit/BWToolkitFramework.framework; sourceTree = "<absolute>"; };
 		E933748311AABF8000B5260B /* Ticky_DataModel1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ticky_DataModel1.1.xcdatamodel; sourceTree = "<group>"; };
 		E93374AC11AAC22700B5260B /* 1.1to1.2.xcmappingmodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcmappingmodel; path = 1.1to1.2.xcmappingmodel; sourceTree = "<group>"; };
+		E93374D411AAC7FE00B5260B /* Ticky_Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_Globals.h; sourceTree = "<group>"; };
 		E950C08B1184872F003EEB33 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
 		E950C08C1184872F003EEB33 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
 		E9CD8DA3117488F3001F846E /* Ticky_ArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_ArrayController.h; sourceTree = "<group>"; };
@@ -91,6 +92,7 @@
 				E9CD8DA4117488F3001F846E /* Ticky_ArrayController.m */,
 				E9012E8911805C7200BBDA60 /* Ticky_AddTaskPanel.h */,
 				E9012E8A11805C7200BBDA60 /* Ticky_AddTaskPanel.m */,
+				E93374D411AAC7FE00B5260B /* Ticky_Globals.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
