@@ -13,6 +13,7 @@
 
 @dynamic Content;
 @dynamic Done;
+@dynamic Order;
 
 - (NSString*) identifier {
 	return [[[self objectID] URIRepresentation] absoluteString];

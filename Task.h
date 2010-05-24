@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSString * Content;
 @property (nonatomic, retain) NSNumber * Done;
+@property (nonatomic, retain) NSNumber * Order;
 
 - (NSString*) identifier;
 

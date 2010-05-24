@@ -247,13 +247,23 @@
 		}
     }
     
+	NSLog(@"test");
+	/* This option is for Core Data versioning and migration */
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	[dict setObject:[NSNumber numberWithBool:YES] forKey:NSMigratePersistentStoresAutomaticallyOption];
+	
+	NSLog(@"after test");
+	
+	
     NSURL *url = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"storedata"]];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: mom];
     if (![persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType 
                                                 configuration:nil 
                                                 URL:url 
-                                                options:nil 
+                                                options:dict 
                                                 error:&error]){
+		
+		/* Let's display a nicer alert box to the end user (with more informations and what to do) */
 		NSDictionary *ui = [error userInfo];
 		if (ui) {
 			NSLog(@"%@:%s %@", [self class], _cmd, [error localizedDescription]);
@@ -278,11 +288,9 @@
 		[alert addButtonWithTitle:@"Quit"];
 		[alert runModal];
 		[alert dealloc];
-		exit(1);
 		
-        //[[NSApplication sharedApplication] presentError:error];
-        //[persistentStoreCoordinator release], persistentStoreCoordinator = nil;
-        //return nil;
+		/* And finally force the program to exit (with error code) */
+		exit(1);
     }    
 
     return persistentStoreCoordinator;

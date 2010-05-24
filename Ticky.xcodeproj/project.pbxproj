@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* MainMenu.xib */; };
-		770B37ED0679A11B001EADE2 /* Ticky_DataModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 770B37EC0679A11B001EADE2 /* Ticky_DataModel.xcdatamodel */; };
 		77C8280E06725ACE000B614F /* Ticky_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C8280C06725ACE000B614F /* Ticky_AppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -16,6 +15,8 @@
 		E9012E8B11805C7200BBDA60 /* Ticky_AddTaskPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9012E8A11805C7200BBDA60 /* Ticky_AddTaskPanel.m */; };
 		E91A497F11808DEC004C3557 /* BWToolkitFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91A497E11808DEC004C3557 /* BWToolkitFramework.framework */; };
 		E91A498F11808E1B004C3557 /* BWToolkitFramework.framework in Copy 3rd party frameworks */ = {isa = PBXBuildFile; fileRef = E91A497E11808DEC004C3557 /* BWToolkitFramework.framework */; };
+		E933748211AABF8000B5260B /* Ticky_DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E933748111AABF8000B5260B /* Ticky_DataModel.xcdatamodeld */; };
+		E93374AD11AAC22700B5260B /* 1.1to1.2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = E93374AC11AAC22700B5260B /* 1.1to1.2.xcmappingmodel */; };
 		E950C08D1184872F003EEB33 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = E950C08C1184872F003EEB33 /* Task.m */; };
 		E9CD8DA5117488F3001F846E /* Ticky_ArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CD8DA4117488F3001F846E /* Ticky_ArrayController.m */; };
 		E9CD8DCF117495E7001F846E /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = E9CD8DCE117495E7001F846E /* icon.icns */; };
@@ -47,7 +48,7 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		2F7446980DB6B7EA00F9684A /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Ticky_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_Prefix.pch; sourceTree = "<group>"; };
-		770B37EC0679A11B001EADE2 /* Ticky_DataModel.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Ticky_DataModel.xcdatamodel; sourceTree = "<group>"; };
+		770B37EC0679A11B001EADE2 /* Ticky_DataModel1.2.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Ticky_DataModel1.2.xcdatamodel; sourceTree = "<group>"; };
 		77C82804067257F0000B614F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		77C8280B06725ACE000B614F /* Ticky_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_AppDelegate.h; sourceTree = "<group>"; };
 		77C8280C06725ACE000B614F /* Ticky_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticky_AppDelegate.m; sourceTree = "<group>"; };
@@ -56,6 +57,8 @@
 		E9012E8911805C7200BBDA60 /* Ticky_AddTaskPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_AddTaskPanel.h; sourceTree = "<group>"; };
 		E9012E8A11805C7200BBDA60 /* Ticky_AddTaskPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticky_AddTaskPanel.m; sourceTree = "<group>"; };
 		E91A497E11808DEC004C3557 /* BWToolkitFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWToolkitFramework.framework; path = /Users/thomas/Downloads/BWToolkit/BWToolkitFramework.framework; sourceTree = "<absolute>"; };
+		E933748311AABF8000B5260B /* Ticky_DataModel1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Ticky_DataModel1.1.xcdatamodel; sourceTree = "<group>"; };
+		E93374AC11AAC22700B5260B /* 1.1to1.2.xcmappingmodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcmappingmodel; path = 1.1to1.2.xcmappingmodel; sourceTree = "<group>"; };
 		E950C08B1184872F003EEB33 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
 		E950C08C1184872F003EEB33 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
 		E9CD8DA3117488F3001F846E /* Ticky_ArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_ArrayController.h; sourceTree = "<group>"; };
@@ -168,7 +171,7 @@
 			children = (
 				E950C08B1184872F003EEB33 /* Task.h */,
 				E950C08C1184872F003EEB33 /* Task.m */,
-				770B37EC0679A11B001EADE2 /* Ticky_DataModel.xcdatamodel */,
+				E933748111AABF8000B5260B /* Ticky_DataModel.xcdatamodeld */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -251,10 +254,11 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				77C8280E06725ACE000B614F /* Ticky_AppDelegate.m in Sources */,
-				770B37ED0679A11B001EADE2 /* Ticky_DataModel.xcdatamodel in Sources */,
+				E933748211AABF8000B5260B /* Ticky_DataModel.xcdatamodeld in Sources */,
 				E9CD8DA5117488F3001F846E /* Ticky_ArrayController.m in Sources */,
 				E9012E8B11805C7200BBDA60 /* Ticky_AddTaskPanel.m in Sources */,
 				E950C08D1184872F003EEB33 /* Task.m in Sources */,
+				E93374AD11AAC22700B5260B /* 1.1to1.2.xcmappingmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +382,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E933748111AABF8000B5260B /* Ticky_DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				770B37EC0679A11B001EADE2 /* Ticky_DataModel1.2.xcdatamodel */,
+				E933748311AABF8000B5260B /* Ticky_DataModel1.1.xcdatamodel */,
+				E93374AC11AAC22700B5260B /* 1.1to1.2.xcmappingmodel */,
+			);
+			currentVersion = 770B37EC0679A11B001EADE2 /* Ticky_DataModel1.2.xcdatamodel */;
+			path = Ticky_DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
 }
