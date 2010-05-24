@@ -247,12 +247,9 @@
 		}
     }
     
-	NSLog(@"test");
 	/* This option is for Core Data versioning and migration */
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	[dict setObject:[NSNumber numberWithBool:YES] forKey:NSMigratePersistentStoresAutomaticallyOption];
-	
-	NSLog(@"after test");
 	
 	
     NSURL *url = [NSURL fileURLWithPath: [applicationSupportDirectory stringByAppendingPathComponent: @"storedata"]];
