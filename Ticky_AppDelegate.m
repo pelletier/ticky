@@ -16,6 +16,9 @@
 @synthesize tableView;
 @synthesize tasksController;
 
+/* Need to move this one to Ticky_globals */
+NSString *DemoItemsDropType = @"TickyTasksDropType";
+
 
 #pragma mark -
 #pragma mark Initialize and desktroy
@@ -127,13 +130,15 @@
 		currentViewPosition = [self renumberViewPositionsOfItems:endItems startingAt:currentViewPosition];
 }
 
-NSString *DemoItemsDropType = @"TickyTasksDropType";
-
 - (NSArray *)sortDescriptors
 {
 	if( _sortDescriptors == nil )
 	{
-		_sortDescriptors = [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"Order" ascending:YES]];
+		NSSortDescriptor *order_by_status = [[NSSortDescriptor alloc] initWithKey:@"Done" ascending:YES];
+		NSSortDescriptor *order_by_order = [[NSSortDescriptor alloc] initWithKey:@"Order" ascending:YES];
+		_sortDescriptors = [NSArray arrayWithObjects:order_by_status, order_by_order, nil];
+		[order_by_order release];
+		[order_by_status release];
 	}
 	return _sortDescriptors;
 }
@@ -191,7 +196,7 @@ NSString *DemoItemsDropType = @"TickyTasksDropType";
 	if( row == 0 )
 		tempRow = -1;
 	else
-		tempRow = row;
+		tempRow = row - 1; // nasty fix. should be tempRow = row here
 	
 	NSArray *startItemsArray = [self itemsWithViewPositionBetween:0 and:tempRow];
 	NSArray *endItemsArray = [self itemsWithViewPositionGreaterThanOrEqualTo:row];
