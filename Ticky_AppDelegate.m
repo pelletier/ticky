@@ -254,9 +254,35 @@
                                                 URL:url 
                                                 options:nil 
                                                 error:&error]){
-        [[NSApplication sharedApplication] presentError:error];
-        [persistentStoreCoordinator release], persistentStoreCoordinator = nil;
-        return nil;
+		NSDictionary *ui = [error userInfo];
+		if (ui) {
+			NSLog(@"%@:%s %@", [self class], _cmd, [error localizedDescription]);
+			for (NSError *suberror in [ui valueForKey:NSDetailedErrorsKey]) {
+				NSLog(@"\t%@", [suberror localizedDescription]);
+			}
+		}
+		else {
+			NSLog(@"%@:%s %@", [self class], _cmd, [error localizedDescription]);
+		}
+		
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert setAlertStyle:NSCriticalAlertStyle];
+		[alert setMessageText:@"Unable to load the tasks database."];
+		NSString *msgText = nil;
+		msgText = [NSString stringWithFormat:@"The recipes database %@%@%@\n%@",
+				   @"is either corrupt or was created by a newer ",
+				   @"version of Ticky. Please contact support to assist ",
+				   @"with this error.\n\nError: ",
+				   [error localizedDescription]];
+		[alert setInformativeText:msgText];
+		[alert addButtonWithTitle:@"Quit"];
+		[alert runModal];
+		[alert dealloc];
+		exit(1);
+		
+        //[[NSApplication sharedApplication] presentError:error];
+        //[persistentStoreCoordinator release], persistentStoreCoordinator = nil;
+        //return nil;
     }    
 
     return persistentStoreCoordinator;
