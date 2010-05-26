@@ -16,9 +16,6 @@
 @synthesize tableView;
 @synthesize tasksController;
 
-/* Need to move this one to Ticky_globals */
-NSString *DemoItemsDropType = @"TickyTasksDropType";
-
 
 #pragma mark -
 #pragma mark Initialize and desktroy
@@ -27,7 +24,7 @@ NSString *DemoItemsDropType = @"TickyTasksDropType";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(objectsDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:[self managedObjectContext]];
 	[tasksController addObserver:self forKeyPath:@"arrangedObjects" options:0 context:NULL];
 	[tableView setDataSource:self];
-	[tableView registerForDraggedTypes:[NSArray arrayWithObjects:DemoItemsDropType, nil]];
+	[tableView registerForDraggedTypes:[NSArray arrayWithObjects:PrivateTableViewDataType, nil]];
 }
 
 
@@ -147,8 +144,8 @@ NSString *DemoItemsDropType = @"TickyTasksDropType";
 - (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pasteboard
 {
 	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
-	[pasteboard declareTypes:[NSArray arrayWithObject:DemoItemsDropType] owner:self];
-	[pasteboard setData:data forType:DemoItemsDropType];
+	[pasteboard declareTypes:[NSArray arrayWithObject:PrivateTableViewDataType] owner:self];
+	[pasteboard setData:data forType:PrivateTableViewDataType];
 	return YES;
 }
 
@@ -171,7 +168,7 @@ NSString *DemoItemsDropType = @"TickyTasksDropType";
 - (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info row:(int)row dropOperation:(NSTableViewDropOperation)operation
 {
 	NSPasteboard *pasteboard = [info draggingPasteboard];
-	NSData *rowData = [pasteboard dataForType:DemoItemsDropType];
+	NSData *rowData = [pasteboard dataForType:PrivateTableViewDataType];
 	NSIndexSet *rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
 	
 	NSArray *allItemsArray = [tasksController arrangedObjects];

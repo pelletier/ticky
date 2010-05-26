@@ -15,4 +15,7 @@
 #define startViewPositionNum [NSNumber numberWithInt:-2]
 #define endViewPositionNum [NSNumber numberWithInt:-3]
 
+/* Drag and Drop constants */
+#define PrivateTableViewDataType @"TickyTasksDropType"
+
 #endif
