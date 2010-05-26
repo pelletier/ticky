@@ -136,13 +136,11 @@
 - (IBAction)markSelectedAsDone:(id)sender {
 	NSLog(@"Cmd+D triggered");
 	if ([tableView numberOfSelectedRows] > 0) {
-		NSLog(@"TableView has selected rows");
 		NSLog(@"%@",[[[[self tasksController] selectedObjects] lastObject] objectID]);
 		NSManagedObject *mo = [[self managedObjectContext] objectWithID:[[[[self tasksController] selectedObjects] lastObject] objectID]];
 		[mo setValue:[NSNumber numberWithInt:1] forKey:@"Done"];
 	}
 	else if ([doneTableView numberOfSelectedRows] > 0) {
-		NSLog(@"DoneTableView has selected rows");
 		NSLog(@"%@",[[[[self doneTasksController] selectedObjects] lastObject] objectID]);
 		NSManagedObject *mo = [[self managedObjectContext] objectWithID:[[[[self doneTasksController] selectedObjects] lastObject] objectID]];
 		[mo setValue:[NSNumber numberWithInt:0] forKey:@"Done"];
