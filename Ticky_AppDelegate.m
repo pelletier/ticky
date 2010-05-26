@@ -87,7 +87,6 @@
 		NSManagedObject *currentObject = [selectedItems objectAtIndex:count];
 		[[self managedObjectContext] deleteObject:currentObject];
 	}
-	[self renumberViewPositions];
 }
 
 
