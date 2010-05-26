@@ -94,7 +94,6 @@
 	}
 }
 
-
 /*
  * Observe changes on tasksController
  */
@@ -106,14 +105,12 @@
 	[self updateBadge];
 }
 
-
 /*
  * Be sure tasksController is always synchronized with Core Data
  */
 - (void)objectsDidChange:(NSNotification *)note {
 	[tasksController rearrangeObjects];
 }
-
 
 /*
  * Open the Feedback page
@@ -128,7 +125,6 @@
 - (IBAction)addNewTask:(id)sender {
 	[addTaskPanel makeKeyAndOrderFront:self];
 }
-
 
 /*
  * Handle the Cmd+D mark current task as done event
@@ -326,7 +322,7 @@
 		[alert setAlertStyle:NSCriticalAlertStyle];
 		[alert setMessageText:@"Unable to load the tasks database."];
 		NSString *msgText = nil;
-		msgText = [NSString stringWithFormat:@"The recipes database %@%@%@\n%@",
+		msgText = [NSString stringWithFormat:@"The tasks database %@%@%@\n%@",
 				   @"is either corrupt or was created by a newer ",
 				   @"version of Ticky. Please contact support to assist ",
 				   @"with this error.\n\nError: ",
