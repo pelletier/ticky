@@ -70,7 +70,7 @@
 						<object class="NSButton" id="718760333">
 							<reference key="NSNextResponder" ref="823886803"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{10, 4}, {24, 25}}</string>
+							<string key="NSFrame">{{10, 2}, {24, 25}}</string>
 							<reference key="NSSuperview" ref="823886803"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="316951945">
@@ -99,7 +99,7 @@
 						<object class="NSSearchField" id="262699507">
 							<reference key="NSNextResponder" ref="823886803"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{171, 6}, {110, 22}}</string>
+							<string key="NSFrame">{{171, 4}, {110, 22}}</string>
 							<reference key="NSSuperview" ref="823886803"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSSearchFieldCell" key="NSCell" id="539084212">
@@ -176,7 +176,7 @@
 						<object class="NSButton" id="308673589">
 							<reference key="NSNextResponder" ref="823886803"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{36, 4}, {24, 25}}</string>
+							<string key="NSFrame">{{36, 2}, {24, 25}}</string>
 							<reference key="NSSuperview" ref="823886803"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="527453380">
@@ -4053,9 +4053,9 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<integer value="1"/>
-					<string>{{643, 175}, {301, 434}}</string>
+					<string>{{516, 80}, {301, 434}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{643, 175}, {301, 434}}</string>
+					<string>{{516, 80}, {301, 434}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<integer value="1"/>
