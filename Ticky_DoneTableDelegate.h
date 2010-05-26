@@ -20,13 +20,4 @@
 @property (nonatomic, retain) IBOutlet NSTableView *tableView;
 @property (nonatomic, retain) IBOutlet NSArrayController *tasksController;
 
-- (NSArray *)itemsUsingFetchPredicate:(NSPredicate *)fetchPredicate;
-- (NSArray *)itemsWithViewPosition:(int)value;
-- (NSArray *)itemsWithNonTemporaryViewPosition;
-- (NSArray *)itemsWithViewPositionGreaterThanOrEqualTo:(int)value;
-- (NSArray *)itemsWithViewPositionBetween:(int)lowValue and:(int)highValue;
-- (int)renumberViewPositionsOfItems:(NSArray *)array startingAt:(int)value;
-- (void)renumberViewPositions;
-- (NSArray *)sortDescriptors;
-
 @end

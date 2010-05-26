@@ -18,7 +18,6 @@
  */
 
 - (BOOL)tableView:(NSTableView*)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard {
-	NSLog(@"Begin Drag done list");
 	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
 	[pboard declareTypes:[NSArray arrayWithObject:PrivateTableViewDataType] owner:self];
 	[pboard setData:data forType:PrivateTableViewDataType];
@@ -31,7 +30,6 @@
  */
 
 - (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id <NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)op {
-	NSLog(@"Validate drop");
 	if([info draggingSource] == tableView) {
 		if(op == NSTableViewDropOn) {
 			[tv setDropRow:row dropOperation:NSTableViewDropAbove];
