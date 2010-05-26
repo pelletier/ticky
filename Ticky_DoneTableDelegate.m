@@ -48,41 +48,47 @@
  * Accept drops
  */
 
-- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
-	NSLog(@"Accept drops");
+- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info row:(int)row dropOperation:(NSTableViewDropOperation)operation
+{   // Note for dummies: the <row> argument is the position of the drop row!
 	
 	/* Extract data */
-	NSPasteboard *pboard = [info draggingPasteboard];
-	NSData *rowData = [pboard dataForType:PrivateTableViewDataType];
-	NSIndexSet* rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
-
-	/* List of the total tasks in the tableview */
-	NSArray *allItemsArray = [tasksController arrangedObjects];
+	NSPasteboard *pasteboard = [info draggingPasteboard];
+	NSData *rowData = [pasteboard dataForType:PrivateTableViewDataType];
+	NSIndexSet *rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
 	
-	/* Create an empty array wich will contain the moved tasks */
+	/* Make a copy of the actual tasks array */
+	NSMutableArray *tasksArrayCopy = [NSMutableArray arrayWithArray:[tasksController arrangedObjects]];
+	
+	/* Construct an array containg the moved rows */
 	NSMutableArray *draggedItemsArray = [NSMutableArray arrayWithCapacity:[rowIndexes count]];
-	
-	/* Simple item counter */
+	NSRange range = NSMakeRange( 0, [rowIndexes lastIndex] + 1 );
 	NSUInteger currentItemIndex = 0;
 	
-	/* Create a range based on moved rows */
-	NSRange range = NSMakeRange( 0, [rowIndexes lastIndex] + 1 );
-	
-	/* For each moved row */
-	while([rowIndexes getIndexes:&currentItemIndex maxCount:1 inIndexRange:&range] > 0) {
-		/* Get the corresponding CoreData object */
-		NSManagedObject *thisItem = [allItemsArray objectAtIndex:currentItemIndex];
-		/* Add it to the dragged items list */
+	while([rowIndexes getIndexes:&currentItemIndex maxCount:1 inIndexRange:&range] > 0)
+	{	/* For each moved index */
+		NSManagedObject *thisItem = [tasksArrayCopy objectAtIndex:currentItemIndex];
 		[draggedItemsArray addObject:thisItem];
+		[tasksArrayCopy removeObjectAtIndex:currentItemIndex];
+		/* Let's put a NULL placeholder here */
+		[tasksArrayCopy insertObject:[NSNull null] atIndex:currentItemIndex];
 	}
 	
-	int count;
-	/* Add a tempoary order number to the moved items */
-	for( count = 0; count < [draggedItemsArray count]; count++ ) {
-		NSManagedObject *currentItemToMove = [draggedItemsArray objectAtIndex:count];
-		[currentItemToMove setValue:temporaryViewPositionNum forKey:@"Order"];
+	/* For each moved array */
+	for (id object in draggedItemsArray) {
+		[tasksArrayCopy insertObject:object atIndex:row];
 	}
 	
+	/* Remove NULL placeholders */
+	[tasksArrayCopy removeObject:[NSNull null]];
+	
+	/* Re number */
+	int num = 0;
+	for (id object in tasksArrayCopy) {
+		[object setValue:[NSNumber numberWithInt:num] forKey:@"Order"];
+		num += 1;
+	}
+	
+	/* Done */
 	return YES;
 }
 
