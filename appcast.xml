@@ -7,6 +7,28 @@
         <language>en</language>
 
         <item>
+            <title>Version 1.2.0</title>
+            <pubDate>Wed, 26 May 2010 22:50:00 +1000</pubDate>
+            <enclosure url="http://github.com/downloads/kizlum/ticky/Ticky1.2.0.zip" 
+                sparkle:version="120"
+                sparkle:shortVersionString="1.2.0"
+                length="1800"
+                type="application/octet-stream"
+                sparkle:dsaSignature="MC0CFDUk1VqJp86QqKA47ydgzYyZ4+DjAhUAli5CsswG6LBVS4WBrILcolXojKM="/>
+                
+            <description><![CDATA[
+                <h2>New features</h2>
+                <ul>
+                    <li>New graphical user interface (two lists).</li>
+                    <li>You can now reorder and mark as done / todo your tasks by drag & drop.</li>
+                    <li>Full keyboard support: you can switch from one list to another with keyboard arrows.</li>
+                    <li>Spacebar behaves like Cmd+D (toggle the currently selected task).</li>
+                </ul>
+            ]]></description>
+            <sparkle:minimumSystemVersion>10.5.1</sparkle:minimumSystemVersion>
+        </item>
+
+        <item>
             <title>Version 1.1.1</title>
             <pubDate>Sun, 25 Apr 2010 10:29:00 +1000</pubDate>
             <enclosure url="http://github.com/downloads/kizlum/ticky/Ticky1.1.1.zip" 
