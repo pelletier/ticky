@@ -19,9 +19,13 @@
 - (void) keyDown:(NSEvent *) event
 {
 	int row = [self selectedRow];
-	
+		
     switch ([event keyCode])
     {
+		case 49: // Space bar
+			[[NSApp delegate] markSelectedAsDone:self];
+			break;
+
         case 126: // Up
             if (row == 0){
 				[self deselectAll:nil];
