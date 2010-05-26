@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Ticky_AddTaskPanel.h"
 #import "Ticky_Globals.h"
+#import "Ticky_DoneTableDelegate.h"
 
 
 @interface Ticky_AppDelegate : NSObject 
@@ -30,8 +31,14 @@
 	
 	/* IB Controllers outlets*/
 	IBOutlet NSArrayController *tasksController;
+	IBOutlet NSArrayController *doneTasksController;
+	
+	/* Delegates */
+	IBOutlet Ticky_DoneTableDelegate *doneTableDelegate;
 }
 
+/* Delegates */
+@property (nonatomic, retain) IBOutlet Ticky_DoneTableDelegate *doneTableDelegate;
 
 /* GUI elements */
 @property (nonatomic, retain) IBOutlet NSWindow *window;
@@ -41,6 +48,7 @@
 
 /* Interface Builder data (Controllers) */
 @property (nonatomic, retain) IBOutlet NSArrayController *tasksController;
+@property (nonatomic, retain) IBOutlet NSArrayController *doneTasksController;
 
 /* Core Data business */
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;

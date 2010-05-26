@@ -14,7 +14,10 @@
 @synthesize window;
 @synthesize addTaskPanel;
 @synthesize tableView;
+@synthesize doneTableView;
 @synthesize tasksController;
+@synthesize doneTasksController;
+@synthesize doneTableDelegate;
 
 
 #pragma mark -
@@ -30,6 +33,7 @@
 	[tableView registerForDraggedTypes:[NSArray arrayWithObject:PrivateTableViewDataType]];
 	
 	/* Configure the done list */
+	[doneTableView setDataSource:doneTableDelegate];
 	[doneTableView registerForDraggedTypes:[NSArray arrayWithObject:PrivateTableViewDataType]];
 }
 
