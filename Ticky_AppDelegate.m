@@ -119,7 +119,7 @@
  * Open the Feedback page
  */
 - (void)openFeedback:(id)sender {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://feedback.ticky.im/"]];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://ticky.lighthouseapp.com/tickets/"]];
 }
 
 /*
