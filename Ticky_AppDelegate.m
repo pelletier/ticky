@@ -61,13 +61,18 @@
 {
 	if( _sortDescriptors == nil )
 	{
-		NSSortDescriptor *order_by_status = [[NSSortDescriptor alloc] initWithKey:@"Done" ascending:YES];
+//		NSSortDescriptor *order_by_status = [[NSSortDescriptor alloc] initWithKey:@"Done" ascending:YES];
 		NSSortDescriptor *order_by_order = [[NSSortDescriptor alloc] initWithKey:@"Order" ascending:YES];
-		_sortDescriptors = [NSArray arrayWithObjects:order_by_status, order_by_order, nil];
+		_sortDescriptors = [NSArray arrayWithObjects:order_by_order, nil];
 		[order_by_order release];
-		[order_by_status release];
+//		[order_by_status release];
 	}
 	return _sortDescriptors;
+}
+
+- (NSArray *)tableViews
+{
+	return [NSArray arrayWithObjects:tableView, doneTableView, nil];
 }
 
 
@@ -162,10 +167,10 @@
 		[searchText replaceOccurrencesOfString:@"Â  " withString:@" " options:0 range:NSMakeRange(0, [searchText length])];
 	}
 	
-	//Remove leading space
+	// Remove leading space
 	if ([searchText length] != 0) [searchText replaceOccurrencesOfString:@" " withString:@"" options:0 range:NSMakeRange(0,1)];
 	
-	//Remove trailing space
+	// Remove trailing space
 	if ([searchText length] != 0) [searchText replaceOccurrencesOfString:@" " withString:@"" options:0 range:NSMakeRange([searchText length]-1, 1)];
 	
 	if ([searchText length] == 0) {
@@ -195,16 +200,24 @@
 #pragma mark -
 #pragma mark Subclassed methods
 
+/*
+ * This method ensure that the user can click on the dock icon to open the main window,
+ * even if he has closed it before.
+ */
 
-- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication
-					hasVisibleWindows:(BOOL)flag
-{
-	if( !flag )
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag {
+	if(!flag) {
 		[window makeKeyAndOrderFront:nil];
+	}
 	
 	return YES;
 }
 
+
+/*
+ * Update the number displayed by the dock icon's red badge.
+ * Note: probably called a bit too often.
+ */
 - (id)updateBadge {
 	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:[self managedObjectContext]];
 	NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
@@ -222,8 +235,6 @@
 	[tile setBadgeLabel:[NSString stringWithFormat:@"%d", nbr]];
 	return self;
 }
-
-
 
 
 #pragma mark -

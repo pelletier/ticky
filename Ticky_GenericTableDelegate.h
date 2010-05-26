@@ -13,9 +13,11 @@
 @interface Ticky_GenericTableDelegate : NSObject {
 	IBOutlet NSTableView *tableView;
 	IBOutlet NSArrayController *tasksController;
+	IBOutlet NSArrayController *otherTasksController;
 }
 
 @property (nonatomic, retain) IBOutlet NSTableView *tableView;
 @property (nonatomic, retain) IBOutlet NSArrayController *tasksController;
+@property (nonatomic, retain) IBOutlet NSArrayController *otherTasksController;
 
 @end

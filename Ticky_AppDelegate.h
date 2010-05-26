@@ -70,5 +70,6 @@
 
 /* Drag and Drop / Reordering helpers */
 - (NSArray *)sortDescriptors;
+- (NSArray *)tableViews;
 
 @end
