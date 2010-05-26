@@ -21,9 +21,9 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="620"/>
-			<integer value="572"/>
 			<integer value="29"/>
+			<integer value="21"/>
+			<integer value="572"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -290,7 +290,7 @@
 																	<bytes key="NSWhite">MC41AA</bytes>
 																</object>
 															</object>
-															<double key="NSRowHeight">17</double>
+															<double key="NSRowHeight">20</double>
 															<int key="NSTvFlags">-1765801984</int>
 															<reference key="NSDelegate"/>
 															<reference key="NSDataSource"/>
@@ -337,7 +337,7 @@
 											<reference key="NSVScroller" ref="1001743323"/>
 											<reference key="NSHScroller" ref="674935310"/>
 											<reference key="NSContentView" ref="993053747"/>
-											<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
+											<bytes key="NSScrollAmts">QSAAAEEgAABBsAAAQbAAAA</bytes>
 										</object>
 									</object>
 									<string key="NSFrameSize">{302, 176}</string>
@@ -362,7 +362,7 @@
 														<object class="BWTransparentTableView" id="17624394">
 															<reference key="NSNextResponder" ref="818882872"/>
 															<int key="NSvFlags">4352</int>
-															<string key="NSFrameSize">{300, 227}</string>
+															<string key="NSFrameSize">{301, 227}</string>
 															<reference key="NSSuperview" ref="818882872"/>
 															<bool key="NSEnabled">YES</bool>
 															<object class="_NSCornerView" key="NSCornerView">
@@ -373,12 +373,12 @@
 															<object class="NSMutableArray" key="NSTableColumns">
 																<bool key="EncodedWithXMLCoder">YES</bool>
 																<object class="NSTableColumn" id="576909113">
-																	<double key="NSWidth">297</double>
+																	<double key="NSWidth">298</double>
 																	<double key="NSMinWidth">40</double>
 																	<double key="NSMaxWidth">1000</double>
 																	<object class="NSTableHeaderCell" key="NSHeaderCell">
-																		<int key="NSCellFlags">75628032</int>
-																		<int key="NSCellFlags2">0</int>
+																		<int key="NSCellFlags">75628096</int>
+																		<int key="NSCellFlags2">2048</int>
 																		<string key="NSContents"/>
 																		<reference key="NSSupport" ref="26"/>
 																		<object class="NSColor" key="NSBackgroundColor">
@@ -427,7 +427,7 @@
 															<int key="NSTableViewDraggingDestinationStyle">0</int>
 														</object>
 													</object>
-													<string key="NSFrameSize">{300, 227}</string>
+													<string key="NSFrameSize">{301, 227}</string>
 													<reference key="NSSuperview" ref="73079061"/>
 													<reference key="NSNextKeyView" ref="17624394"/>
 													<reference key="NSDocView" ref="17624394"/>
@@ -455,7 +455,7 @@
 													<double key="NSPercent">0.57142859697341919</double>
 												</object>
 											</object>
-											<string key="NSFrame">{{1, 0}, {300, 227}}</string>
+											<string key="NSFrameSize">{301, 227}</string>
 											<reference key="NSSuperview" ref="640062139"/>
 											<reference key="NSNextKeyView" ref="818882872"/>
 											<int key="NSsFlags">528</int>
