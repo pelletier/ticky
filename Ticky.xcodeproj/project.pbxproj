@@ -18,7 +18,7 @@
 		E933748211AABF8000B5260B /* Ticky_DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E933748111AABF8000B5260B /* Ticky_DataModel.xcdatamodeld */; };
 		E93374AD11AAC22700B5260B /* 1.1to1.2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = E93374AC11AAC22700B5260B /* 1.1to1.2.xcmappingmodel */; };
 		E950C08D1184872F003EEB33 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = E950C08C1184872F003EEB33 /* Task.m */; };
-		E9CA79FC11AD469500D670E2 /* Ticky_DoneTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CA79FB11AD469500D670E2 /* Ticky_DoneTableDelegate.m */; };
+		E9CA79FC11AD469500D670E2 /* Ticky_GenericTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CA79FB11AD469500D670E2 /* Ticky_GenericTableDelegate.m */; };
 		E9CD8DA5117488F3001F846E /* Ticky_ArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CD8DA4117488F3001F846E /* Ticky_ArrayController.m */; };
 		E9CD8DCF117495E7001F846E /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = E9CD8DCE117495E7001F846E /* icon.icns */; };
 		E9CD8ECE1174B2A0001F846E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9CD8ECD1174B2A0001F846E /* Sparkle.framework */; };
@@ -63,8 +63,8 @@
 		E93374D411AAC7FE00B5260B /* Ticky_Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_Globals.h; sourceTree = "<group>"; };
 		E950C08B1184872F003EEB33 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
 		E950C08C1184872F003EEB33 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
-		E9CA79FA11AD469500D670E2 /* Ticky_DoneTableDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_DoneTableDelegate.h; sourceTree = "<group>"; };
-		E9CA79FB11AD469500D670E2 /* Ticky_DoneTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticky_DoneTableDelegate.m; sourceTree = "<group>"; };
+		E9CA79FA11AD469500D670E2 /* Ticky_GenericTableDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_GenericTableDelegate.h; sourceTree = "<group>"; };
+		E9CA79FB11AD469500D670E2 /* Ticky_GenericTableDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticky_GenericTableDelegate.m; sourceTree = "<group>"; };
 		E9CD8DA3117488F3001F846E /* Ticky_ArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ticky_ArrayController.h; sourceTree = "<group>"; };
 		E9CD8DA4117488F3001F846E /* Ticky_ArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ticky_ArrayController.m; sourceTree = "<group>"; };
 		E9CD8DCE117495E7001F846E /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
@@ -95,8 +95,8 @@
 				E9CD8DA4117488F3001F846E /* Ticky_ArrayController.m */,
 				E9012E8911805C7200BBDA60 /* Ticky_AddTaskPanel.h */,
 				E9012E8A11805C7200BBDA60 /* Ticky_AddTaskPanel.m */,
-				E9CA79FA11AD469500D670E2 /* Ticky_DoneTableDelegate.h */,
-				E9CA79FB11AD469500D670E2 /* Ticky_DoneTableDelegate.m */,
+				E9CA79FA11AD469500D670E2 /* Ticky_GenericTableDelegate.h */,
+				E9CA79FB11AD469500D670E2 /* Ticky_GenericTableDelegate.m */,
 				E93374D411AAC7FE00B5260B /* Ticky_Globals.h */,
 			);
 			name = Classes;
@@ -266,7 +266,7 @@
 				E9012E8B11805C7200BBDA60 /* Ticky_AddTaskPanel.m in Sources */,
 				E950C08D1184872F003EEB33 /* Task.m in Sources */,
 				E93374AD11AAC22700B5260B /* 1.1to1.2.xcmappingmodel in Sources */,
-				E9CA79FC11AD469500D670E2 /* Ticky_DoneTableDelegate.m in Sources */,
+				E9CA79FC11AD469500D670E2 /* Ticky_GenericTableDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

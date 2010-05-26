@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Ticky_AddTaskPanel.h"
 #import "Ticky_Globals.h"
-#import "Ticky_DoneTableDelegate.h"
+#import "Ticky_GenericTableDelegate.h"
 
 
 @interface Ticky_AppDelegate : NSObject 
@@ -34,11 +34,13 @@
 	IBOutlet NSArrayController *doneTasksController;
 	
 	/* Delegates */
-	IBOutlet Ticky_DoneTableDelegate *doneTableDelegate;
+	IBOutlet Ticky_GenericTableDelegate *todoTableDelegate;
+	IBOutlet Ticky_GenericTableDelegate *doneTableDelegate;
 }
 
 /* Delegates */
-@property (nonatomic, retain) IBOutlet Ticky_DoneTableDelegate *doneTableDelegate;
+@property (nonatomic, retain) IBOutlet Ticky_GenericTableDelegate *todoTableDelegate;
+@property (nonatomic, retain) IBOutlet Ticky_GenericTableDelegate *doneTableDelegate;
 
 /* GUI elements */
 @property (nonatomic, retain) IBOutlet NSWindow *window;
@@ -67,14 +69,6 @@
 
 
 /* Drag and Drop / Reordering helpers */
-- (NSArray *)itemsUsingFetchPredicate:(NSPredicate *)fetchPredicate;
-- (NSArray *)itemsWithViewPosition:(int)value;
-- (NSArray *)itemsWithNonTemporaryViewPosition;
-- (NSArray *)itemsWithViewPositionGreaterThanOrEqualTo:(int)value;
-- (NSArray *)itemsWithViewPositionBetween:(int)lowValue and:(int)highValue;
-- (int)renumberViewPositionsOfItems:(NSArray *)array startingAt:(int)value;
-- (void)renumberViewPositions;
-
 - (NSArray *)sortDescriptors;
 
 @end

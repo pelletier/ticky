@@ -1,17 +1,18 @@
 //
-//  Ticky_DoneTableDelegate.m
+//  Ticky_GenericTableDelegate.m
 //  Ticky
 //
 //  Created by Thomas PELLETIER on 26/05/10.
 //  Copyright 2010 Thomas PELLETIER. All rights reserved.
 //
 
-#import "Ticky_DoneTableDelegate.h"
+#import "Ticky_GenericTableDelegate.h"
 
-@implementation Ticky_DoneTableDelegate
+@implementation Ticky_GenericTableDelegate
 
 @synthesize tableView;
 @synthesize tasksController;
+
 
 /*
  * Initiate a drag from the table

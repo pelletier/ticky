@@ -1,18 +1,16 @@
 //
-//  Ticky_DoneTableDelegate.h
+//  Ticky_GenericTableDelegate.h
 //  Ticky
 //
 //  Created by Thomas PELLETIER on 26/05/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Thomas PELLETIER. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
 #import "Ticky_Globals.h"
 
 
-@interface Ticky_DoneTableDelegate : NSObject {
-	NSArray *_sortDescriptors;
-	
+@interface Ticky_GenericTableDelegate : NSObject {
 	IBOutlet NSTableView *tableView;
 	IBOutlet NSArrayController *tasksController;
 }

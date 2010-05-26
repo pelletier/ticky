@@ -18,6 +18,7 @@
 @synthesize tasksController;
 @synthesize doneTasksController;
 @synthesize doneTableDelegate;
+@synthesize todoTableDelegate;
 
 
 #pragma mark -
@@ -29,11 +30,9 @@
 	[tasksController addObserver:self forKeyPath:@"arrangedObjects" options:0 context:NULL];
 	
 	/* Configure the todo list */
-	[tableView setDataSource:self];
 	[tableView registerForDraggedTypes:[NSArray arrayWithObject:PrivateTableViewDataType]];
 	
 	/* Configure the done list */
-	[doneTableView setDataSource:doneTableDelegate];
 	[doneTableView registerForDraggedTypes:[NSArray arrayWithObject:PrivateTableViewDataType]];
 }
 
@@ -58,89 +57,6 @@
 #pragma mark -
 #pragma mark TableView drag and drop
 
-- (NSArray *)itemsUsingFetchPredicate:(NSPredicate *)fetchPredicate
-{
-	NSError *error = nil;
-	NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:[self managedObjectContext]];
-	
-	NSArray *arrayOfItems;
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	[fetchRequest setEntity:entityDesc];
-	[fetchRequest setPredicate:fetchPredicate];
-	[fetchRequest setSortDescriptors:[self sortDescriptors]];
-	arrayOfItems = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
-	[fetchRequest release];
-	
-	return arrayOfItems;
-}
-
-- (NSArray *)itemsWithViewPosition:(int)value
-{
-	NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"Order == %i", value];
-	
-	return [self itemsUsingFetchPredicate:fetchPredicate];
-}
-
-- (NSArray *)itemsWithNonTemporaryViewPosition
-{
-	NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"Order >= 0"];
-	
-	return [self itemsUsingFetchPredicate:fetchPredicate];
-}
-
-- (NSArray *)itemsWithViewPositionGreaterThanOrEqualTo:(int)value
-{
-	NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"Order >= %i", value];
-	
-	return [self itemsUsingFetchPredicate:fetchPredicate];
-}
-
-- (NSArray *)itemsWithViewPositionBetween:(int)lowValue and:(int)highValue
-{
-	NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"Order >= %i && Order <= %i", lowValue, highValue];
-	
-	return [self itemsUsingFetchPredicate:fetchPredicate];
-}
-
-- (int)renumberViewPositionsOfItems:(NSArray *)array startingAt:(int)value
-{
-	int currentViewPosition = value;
-	
-	int count = 0;
-	
-	if( array && ([array count] > 0) )
-	{
-		for( count = 0; count < [array count]; count++ )
-		{
-			NSManagedObject *currentObject = [array objectAtIndex:count];
-			[currentObject setValue:[NSNumber numberWithInt:currentViewPosition] forKey:@"Order"];
-			currentViewPosition++;
-		}
-	}
-	
-	return currentViewPosition;
-}
-
-- (void)renumberViewPositions {
-	NSLog(@"Start renumbering");
-	NSArray *startItems = [self itemsWithViewPosition:[startViewPositionNum intValue]];
-	
-	NSArray *existingItems = [self itemsWithNonTemporaryViewPosition];
-	
-	NSArray *endItems = [self itemsWithViewPosition:[endViewPositionNum intValue]];
-	
-	int currentViewPosition = 0;
-	
-	if( startItems && ([startItems count] > 0) )
-		currentViewPosition = [self renumberViewPositionsOfItems:startItems startingAt:currentViewPosition];
-	
-	if( existingItems && ([existingItems count] > 0) )
-		currentViewPosition = [self renumberViewPositionsOfItems:existingItems startingAt:currentViewPosition];
-	
-	if( endItems && ([endItems count] > 0) )
-		currentViewPosition = [self renumberViewPositionsOfItems:endItems startingAt:currentViewPosition];
-}
-
 - (NSArray *)sortDescriptors
 {
 	if( _sortDescriptors == nil )
@@ -152,75 +68,6 @@
 		[order_by_status release];
 	}
 	return _sortDescriptors;
-}
-
-
-- (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pasteboard
-{
-	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
-	[pasteboard declareTypes:[NSArray arrayWithObject:PrivateTableViewDataType] owner:self];
-	[pasteboard setData:data forType:PrivateTableViewDataType];
-	return YES;
-}
-
-
-- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id  <NSDraggingInfo>)info proposedRow:(int)row proposedDropOperation:(NSTableViewDropOperation)operation
-{
-	if( [info draggingSource] == tableView )
-	{
-		if( operation == NSTableViewDropOn )
-			[tv setDropRow:row dropOperation:NSTableViewDropAbove];
-		
-		return NSDragOperationMove;
-	}
-	else
-	{
-		return NSDragOperationNone;
-	}
-}
-
-- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info row:(int)row dropOperation:(NSTableViewDropOperation)operation
-{
-	NSPasteboard *pasteboard = [info draggingPasteboard];
-	NSData *rowData = [pasteboard dataForType:PrivateTableViewDataType];
-	NSIndexSet *rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
-	
-	NSArray *allItemsArray = [tasksController arrangedObjects];
-	NSMutableArray *draggedItemsArray = [NSMutableArray arrayWithCapacity:[rowIndexes count]];
-	
-	NSUInteger currentItemIndex = 0;
-	NSRange range = NSMakeRange( 0, [rowIndexes lastIndex] + 1 );
-	while([rowIndexes getIndexes:&currentItemIndex maxCount:1 inIndexRange:&range] > 0)
-	{
-		NSManagedObject *thisItem = [allItemsArray objectAtIndex:currentItemIndex];
-		[draggedItemsArray addObject:thisItem];
-	}
-	
-	int count;
-	for( count = 0; count < [draggedItemsArray count]; count++ )
-	{
-		NSManagedObject *currentItemToMove = [draggedItemsArray objectAtIndex:count];
-		[currentItemToMove setValue:temporaryViewPositionNum forKey:@"Order"];
-	}
-	
-	int tempRow;
-	if( row == 0 )
-		tempRow = -1;
-	else
-		tempRow = row - 1; // nasty fix. should be tempRow = row here
-	
-	NSArray *startItemsArray = [self itemsWithViewPositionBetween:0 and:tempRow];
-	NSArray *endItemsArray = [self itemsWithViewPositionGreaterThanOrEqualTo:row];
-	
-	int currentViewPosition;
-	
-	currentViewPosition = [self renumberViewPositionsOfItems:startItemsArray startingAt:0];
-	
-	currentViewPosition = [self renumberViewPositionsOfItems:draggedItemsArray startingAt:currentViewPosition];
-	
-	currentViewPosition = [self renumberViewPositionsOfItems:endItemsArray startingAt:currentViewPosition];
-	
-	return YES;
 }
 
 
