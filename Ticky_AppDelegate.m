@@ -84,14 +84,25 @@
  * Remove the table selected task
  */
 - (IBAction)removeSelectedTasks:(id)sender {
-	NSArray *selectedItems = [tasksController selectedObjects];
-	
-	int count;
-	for( count = 0; count < [selectedItems count]; count ++ )
-	{
-		NSManagedObject *currentObject = [selectedItems objectAtIndex:count];
-		[[self managedObjectContext] deleteObject:currentObject];
+	NSManagedObject *mo = NULL;
+
+	if ([tableView numberOfSelectedRows] > 0) {
+		mo = [[self managedObjectContext] objectWithID:[[[[self tasksController] selectedObjects] lastObject] objectID]];
 	}
+	else if ([doneTableView numberOfSelectedRows] > 0) {
+		mo = [[self managedObjectContext] objectWithID:[[[[self doneTasksController] selectedObjects] lastObject] objectID]];
+	}
+	else {
+		NSLog(@"Unhandled / Bug");
+	}
+	
+	if (mo != NULL) {
+		[[self managedObjectContext] deleteObject:mo];
+	}
+		 
+	[doneTableView deselectAll:self];
+	[tableView deselectAll:self];
+	[window makeFirstResponder:tableView];
 }
 
 /*
@@ -125,6 +136,7 @@
 - (IBAction)addNewTask:(id)sender {
 	[addTaskPanel makeKeyAndOrderFront:self];
 }
+
 
 /*
  * Handle the Cmd+D mark current task as done event
