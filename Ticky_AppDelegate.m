@@ -134,26 +134,26 @@
  * Handle the Cmd+D mark current task as done event
  */
 - (IBAction)markSelectedAsDone:(id)sender {
-	NSLog(@"%@",[[[[self tasksController] selectedObjects] lastObject] objectID]);
-	NSManagedObject *mo = [[self managedObjectContext] objectWithID:[[[[self tasksController] selectedObjects] lastObject] objectID]];
-	
-	NSNumber *current = [mo valueForKey:@"Done"];
-	
-	if (current == nil) {
+	NSLog(@"Cmd+D triggered");
+	if ([tableView numberOfSelectedRows] > 0) {
+		NSLog(@"TableView has selected rows");
+		NSLog(@"%@",[[[[self tasksController] selectedObjects] lastObject] objectID]);
+		NSManagedObject *mo = [[self managedObjectContext] objectWithID:[[[[self tasksController] selectedObjects] lastObject] objectID]];
 		[mo setValue:[NSNumber numberWithInt:1] forKey:@"Done"];
 	}
+	else if ([doneTableView numberOfSelectedRows] > 0) {
+		NSLog(@"DoneTableView has selected rows");
+		NSLog(@"%@",[[[[self doneTasksController] selectedObjects] lastObject] objectID]);
+		NSManagedObject *mo = [[self managedObjectContext] objectWithID:[[[[self doneTasksController] selectedObjects] lastObject] objectID]];
+		[mo setValue:[NSNumber numberWithInt:0] forKey:@"Done"];
+	}
 	else {
-		if ([current isEqualToNumber:[NSNumber numberWithInt:0]]) {
-			[mo setValue:[NSNumber numberWithInt:1] forKey:@"Done"];
-		}
-		else {
-			[mo setValue:[NSNumber numberWithInt:0] forKey:@"Done"];
-		}
-
+		NSLog(@"Unhandled / Bug");
 	}
 	
-	NSIndexSet * selSet = [NSIndexSet indexSetWithIndex:0];
-	[tableView selectRowIndexes:selSet byExtendingSelection:NO];
+	[doneTableView deselectAll:self];
+	[tableView deselectAll:self];
+	[window makeFirstResponder:tableView];
 }
 
 /*
