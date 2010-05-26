@@ -22,8 +22,6 @@
 	[newTask setValue:endViewPositionNum forKey:@"Order"];
 	[self orderOut:self];
 	[[NSApp delegate] updateBadge];
-	NSLog(@"Hal");
-	[[NSApp delegate] renumberViewPositions];
 }
 
 @end

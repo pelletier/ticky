@@ -14,24 +14,30 @@
 @synthesize window;
 @synthesize addTaskPanel;
 @synthesize tableView;
+@synthesize doneTableView;
 @synthesize tasksController;
-
-/* Need to move this one to Ticky_globals */
-NSString *DemoItemsDropType = @"TickyTasksDropType";
+@synthesize doneTasksController;
+@synthesize doneTableDelegate;
+@synthesize todoTableDelegate;
 
 
 #pragma mark -
 #pragma mark Initialize and desktroy
 
 - (void)awakeFromNib {
+	/* Add notification event for task changes (in order to refresh the badge for example) */
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(objectsDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:[self managedObjectContext]];
 	[tasksController addObserver:self forKeyPath:@"arrangedObjects" options:0 context:NULL];
-	[tableView setDataSource:self];
-	[tableView registerForDraggedTypes:[NSArray arrayWithObjects:DemoItemsDropType, nil]];
+	
+	/* Configure the todo list */
+	[tableView registerForDraggedTypes:[NSArray arrayWithObject:PrivateTableViewDataType]];
+	
+	/* Configure the done list */
+	[doneTableView registerForDraggedTypes:[NSArray arrayWithObject:PrivateTableViewDataType]];
 }
 
-
 - (void)dealloc {
+	/* Release them all */
 	[_sortDescriptors release];
     [window release];
 	[addTaskPanel release];
@@ -39,7 +45,11 @@ NSString *DemoItemsDropType = @"TickyTasksDropType";
     [managedObjectContext release];
     [persistentStoreCoordinator release];
     [managedObjectModel release];
+	
+	/* Remove events */
 	[tasksController removeObserver:self forKeyPath:@"arrangedObjects"];
+	
+	/* Final dealloc */
     [super dealloc];
 }
 
@@ -47,169 +57,22 @@ NSString *DemoItemsDropType = @"TickyTasksDropType";
 #pragma mark -
 #pragma mark TableView drag and drop
 
-- (NSArray *)itemsUsingFetchPredicate:(NSPredicate *)fetchPredicate
-{
-	NSError *error = nil;
-	NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:[self managedObjectContext]];
-	
-	NSArray *arrayOfItems;
-	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-	[fetchRequest setEntity:entityDesc];
-	[fetchRequest setPredicate:fetchPredicate];
-	[fetchRequest setSortDescriptors:[self sortDescriptors]];
-	arrayOfItems = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
-	[fetchRequest release];
-	
-	return arrayOfItems;
-}
-
-- (NSArray *)itemsWithViewPosition:(int)value
-{
-	NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"Order == %i", value];
-	
-	return [self itemsUsingFetchPredicate:fetchPredicate];
-}
-
-- (NSArray *)itemsWithNonTemporaryViewPosition
-{
-	NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"Order >= 0"];
-	
-	return [self itemsUsingFetchPredicate:fetchPredicate];
-}
-
-- (NSArray *)itemsWithViewPositionGreaterThanOrEqualTo:(int)value
-{
-	NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"Order >= %i", value];
-	
-	return [self itemsUsingFetchPredicate:fetchPredicate];
-}
-
-- (NSArray *)itemsWithViewPositionBetween:(int)lowValue and:(int)highValue
-{
-	NSPredicate *fetchPredicate = [NSPredicate predicateWithFormat:@"Order >= %i && Order <= %i", lowValue, highValue];
-	
-	return [self itemsUsingFetchPredicate:fetchPredicate];
-}
-
-- (int)renumberViewPositionsOfItems:(NSArray *)array startingAt:(int)value
-{
-	int currentViewPosition = value;
-	
-	int count = 0;
-	
-	if( array && ([array count] > 0) )
-	{
-		for( count = 0; count < [array count]; count++ )
-		{
-			NSManagedObject *currentObject = [array objectAtIndex:count];
-			[currentObject setValue:[NSNumber numberWithInt:currentViewPosition] forKey:@"Order"];
-			currentViewPosition++;
-		}
-	}
-	
-	return currentViewPosition;
-}
-
-- (void)renumberViewPositions {
-	NSLog(@"Start renumbering");
-	NSArray *startItems = [self itemsWithViewPosition:[startViewPositionNum intValue]];
-	
-	NSArray *existingItems = [self itemsWithNonTemporaryViewPosition];
-	
-	NSArray *endItems = [self itemsWithViewPosition:[endViewPositionNum intValue]];
-	
-	int currentViewPosition = 0;
-	
-	if( startItems && ([startItems count] > 0) )
-		currentViewPosition = [self renumberViewPositionsOfItems:startItems startingAt:currentViewPosition];
-	
-	if( existingItems && ([existingItems count] > 0) )
-		currentViewPosition = [self renumberViewPositionsOfItems:existingItems startingAt:currentViewPosition];
-	
-	if( endItems && ([endItems count] > 0) )
-		currentViewPosition = [self renumberViewPositionsOfItems:endItems startingAt:currentViewPosition];
-}
-
 - (NSArray *)sortDescriptors
 {
 	if( _sortDescriptors == nil )
 	{
-		NSSortDescriptor *order_by_status = [[NSSortDescriptor alloc] initWithKey:@"Done" ascending:YES];
+//		NSSortDescriptor *order_by_status = [[NSSortDescriptor alloc] initWithKey:@"Done" ascending:YES];
 		NSSortDescriptor *order_by_order = [[NSSortDescriptor alloc] initWithKey:@"Order" ascending:YES];
-		_sortDescriptors = [NSArray arrayWithObjects:order_by_status, order_by_order, nil];
+		_sortDescriptors = [NSArray arrayWithObjects:order_by_order, nil];
 		[order_by_order release];
-		[order_by_status release];
+//		[order_by_status release];
 	}
 	return _sortDescriptors;
 }
 
-
-- (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pasteboard
+- (NSArray *)tableViews
 {
-	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
-	[pasteboard declareTypes:[NSArray arrayWithObject:DemoItemsDropType] owner:self];
-	[pasteboard setData:data forType:DemoItemsDropType];
-	return YES;
-}
-
-
-- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id  <NSDraggingInfo>)info proposedRow:(int)row proposedDropOperation:(NSTableViewDropOperation)operation
-{
-	if( [info draggingSource] == tableView )
-	{
-		if( operation == NSTableViewDropOn )
-			[tv setDropRow:row dropOperation:NSTableViewDropAbove];
-		
-		return NSDragOperationMove;
-	}
-	else
-	{
-		return NSDragOperationNone;
-	}
-}
-
-- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info row:(int)row dropOperation:(NSTableViewDropOperation)operation
-{
-	NSPasteboard *pasteboard = [info draggingPasteboard];
-	NSData *rowData = [pasteboard dataForType:DemoItemsDropType];
-	NSIndexSet *rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
-	
-	NSArray *allItemsArray = [tasksController arrangedObjects];
-	NSMutableArray *draggedItemsArray = [NSMutableArray arrayWithCapacity:[rowIndexes count]];
-	
-	NSUInteger currentItemIndex = 0;
-	NSRange range = NSMakeRange( 0, [rowIndexes lastIndex] + 1 );
-	while([rowIndexes getIndexes:&currentItemIndex maxCount:1 inIndexRange:&range] > 0)
-	{
-		NSManagedObject *thisItem = [allItemsArray objectAtIndex:currentItemIndex];
-		[draggedItemsArray addObject:thisItem];
-	}
-	
-	int count;
-	for( count = 0; count < [draggedItemsArray count]; count++ )
-	{
-		NSManagedObject *currentItemToMove = [draggedItemsArray objectAtIndex:count];
-		[currentItemToMove setValue:temporaryViewPositionNum forKey:@"Order"];
-	}
-	
-	int tempRow;
-	if( row == 0 )
-		tempRow = -1;
-	else
-		tempRow = row - 1; // nasty fix. should be tempRow = row here
-	
-	NSArray *startItemsArray = [self itemsWithViewPositionBetween:0 and:tempRow];
-	NSArray *endItemsArray = [self itemsWithViewPositionGreaterThanOrEqualTo:row];
-	
-	int currentViewPosition;
-	
-	currentViewPosition = [self renumberViewPositionsOfItems:startItemsArray startingAt:0];
-	
-	currentViewPosition = [self renumberViewPositionsOfItems:draggedItemsArray startingAt:currentViewPosition];
-	
-	currentViewPosition = [self renumberViewPositionsOfItems:endItemsArray startingAt:currentViewPosition];
-	
-	return YES;
+	return [NSArray arrayWithObjects:tableView, doneTableView, nil];
 }
 
 
@@ -229,7 +92,6 @@ NSString *DemoItemsDropType = @"TickyTasksDropType";
 		NSManagedObject *currentObject = [selectedItems objectAtIndex:count];
 		[[self managedObjectContext] deleteObject:currentObject];
 	}
-	[self renumberViewPositions];
 }
 
 
@@ -305,10 +167,10 @@ NSString *DemoItemsDropType = @"TickyTasksDropType";
 		[searchText replaceOccurrencesOfString:@"Â  " withString:@" " options:0 range:NSMakeRange(0, [searchText length])];
 	}
 	
-	//Remove leading space
+	// Remove leading space
 	if ([searchText length] != 0) [searchText replaceOccurrencesOfString:@" " withString:@"" options:0 range:NSMakeRange(0,1)];
 	
-	//Remove trailing space
+	// Remove trailing space
 	if ([searchText length] != 0) [searchText replaceOccurrencesOfString:@" " withString:@"" options:0 range:NSMakeRange([searchText length]-1, 1)];
 	
 	if ([searchText length] == 0) {
@@ -338,16 +200,24 @@ NSString *DemoItemsDropType = @"TickyTasksDropType";
 #pragma mark -
 #pragma mark Subclassed methods
 
+/*
+ * This method ensure that the user can click on the dock icon to open the main window,
+ * even if he has closed it before.
+ */
 
-- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication
-					hasVisibleWindows:(BOOL)flag
-{
-	if( !flag )
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag {
+	if(!flag) {
 		[window makeKeyAndOrderFront:nil];
+	}
 	
 	return YES;
 }
 
+
+/*
+ * Update the number displayed by the dock icon's red badge.
+ * Note: probably called a bit too often.
+ */
 - (id)updateBadge {
 	NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:[self managedObjectContext]];
 	NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
@@ -365,8 +235,6 @@ NSString *DemoItemsDropType = @"TickyTasksDropType";
 	[tile setBadgeLabel:[NSString stringWithFormat:@"%d", nbr]];
 	return self;
 }
-
-
 
 
 #pragma mark -
