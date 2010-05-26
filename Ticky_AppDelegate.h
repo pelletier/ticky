@@ -10,39 +10,51 @@
 #import "Ticky_AddTaskPanel.h"
 #import "Ticky_Globals.h"
 
+
 @interface Ticky_AppDelegate : NSObject 
 {
-    NSWindow *window;
-    Ticky_AddTaskPanel *addTaskPanel;
-	
-    NSPersistentStoreCoordinator *persistentStoreCoordinator;
-    NSManagedObjectModel *managedObjectModel;
-    NSManagedObjectContext *managedObjectContext;
+	/* Internal data */
 	NSArray *_sortDescriptors;
 	
-	IBOutlet NSArrayController *tasksController;
+	/* Core Data business */
+    NSPersistentStoreCoordinator *persistentStoreCoordinator;
+    NSManagedObjectModel *managedObjectModel;
+    NSManagedObjectContext *managedObjectContext;	
+	
+	/* GUI elements */
+	NSWindow *window;
+    Ticky_AddTaskPanel *addTaskPanel;
 	IBOutlet NSSearchField *searchField;
 	IBOutlet NSTableView *tableView;
+	IBOutlet NSTableView *doneTableView;
+	
+	/* IB Controllers outlets*/
+	IBOutlet NSArrayController *tasksController;
 }
 
+
+/* GUI elements */
 @property (nonatomic, retain) IBOutlet NSWindow *window;
 @property (nonatomic, retain) IBOutlet Ticky_AddTaskPanel *addTaskPanel;
 @property (nonatomic, retain) IBOutlet NSTableView *tableView;
+@property (nonatomic, retain) IBOutlet NSTableView *doneTableView;
+
+/* Interface Builder data (Controllers) */
 @property (nonatomic, retain) IBOutlet NSArrayController *tasksController;
 
+/* Core Data business */
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 
-//@property (nonatomic, retain, readonly) NSArray *sortDescriptors;
 
+/* GUI Actions*/
 - (IBAction)saveAction:sender;
 - (IBAction)filterTasks:(id)sender;
 - (IBAction)addNewTask:(id)sender;
 - (IBAction)removeSelectedTasks:(id)sender;
 - (IBAction)markSelectedAsDone:(id)sender;
 - (IBAction)openFeedback:(id)sender;
-
 - (id)updateBadge;
 
 

@@ -21,14 +21,20 @@
 #pragma mark Initialize and desktroy
 
 - (void)awakeFromNib {
+	/* Add notification event for task changes (in order to refresh the badge for example) */
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(objectsDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:[self managedObjectContext]];
 	[tasksController addObserver:self forKeyPath:@"arrangedObjects" options:0 context:NULL];
+	
+	/* Configure the todo list */
 	[tableView setDataSource:self];
-	[tableView registerForDraggedTypes:[NSArray arrayWithObjects:PrivateTableViewDataType, nil]];
+	[tableView registerForDraggedTypes:[NSArray arrayWithObject:PrivateTableViewDataType]];
+	
+	/* Configure the done list */
+	[doneTableView registerForDraggedTypes:[NSArray arrayWithObject:PrivateTableViewDataType]];
 }
 
-
 - (void)dealloc {
+	/* Release them all */
 	[_sortDescriptors release];
     [window release];
 	[addTaskPanel release];
@@ -36,7 +42,11 @@
     [managedObjectContext release];
     [persistentStoreCoordinator release];
     [managedObjectModel release];
+	
+	/* Remove events */
 	[tasksController removeObserver:self forKeyPath:@"arrangedObjects"];
+	
+	/* Final dealloc */
     [super dealloc];
 }
 
