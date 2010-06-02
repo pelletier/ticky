@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head profile="http://www.w3.org/2005/10/profile">
+	    <title>Ticky</title>
+	    <link rel="stylesheet" href="{{MEDIA_URL}}/css/master.css" type="text/css" media="screen"/>
+	    <link rel="icon" type="image/png" href="{{MEDIA_URL}}/images/favicon.png" />
+		<link rel="alternate" type="application/rss+xml" href="http://pipes.yahoo.com/pipes/pipe.run?_id=65c8daf6a6d408f18e8acc11170c4a16&_render=rss" title="All RSS feeds">
+		<link rel="alternate" type="application/rss+xml" href="http://blog.ticky.im/rss" title="Blog's RSS">
+		<link rel="alternate" type="application/rss+xml" href="http://twitter.com/statuses/user_timeline/115927432.rss" title="Twitter's RSS">
+    </head>
+    <body>
+        <div><a href="http://github.com/kizlum/ticky">
+	<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+	</a></div>
+        
+        
+        
+        <div class="header">
+            <div class="container">
+                <h1><a href="http://ticky.im/">Ticky</a></h1>
+                <div class="sub">
+                    When task management gets as <strong>cool</strong> as drinking coffee.
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">            
+            <div class="content">
+			
+			{% block content %}{% endblock content %}
+	
+            </div>
+
+            
+            <div class="footer">
+                <p>
+                    &copy; 2009-2010 <a href="http://thomas.pelletier.im">Thomas Pelletier</a> &bull; <a href="{% url license %}">License</a> &bull; <a href="mailto:contact@ticky.im">Contact</a>
+                </p>
+            </div>
+        </div>
+        
+        <script type="text/javascript" >
+           
+           var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+            try{
+            var pageTracker = _gat._getTracker("UA-11353579-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+        </script>
+    </body>
+</html>

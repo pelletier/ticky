@@ -31,6 +31,17 @@ body {
 	margin-right: 50px;
 	color: #333;
 	text-shadow: #FFF 1px 1px 0px;
+	text-decoration: none;
+}
+
+.header h1 a{
+    color: #333;
+    text-decoration: none;
+    z-index: 99;
+}
+
+.header h1 a:hover {
+    border-bottom: 1px dotted #333;
 }
 
 .header .sub {
@@ -39,6 +50,7 @@ body {
 	top: 23px;
 	color: #999;
 	text-shadow: #FFF 1px 1px;
+	z-index: 1;
 }
 
 .description {
@@ -73,8 +85,6 @@ body {
 .links a{
 	color: #333 ;
 	text-decoration: none;
-/*	text-shadow: #CCC 1px 1px;*/
-/*	text-shadow: #00CEFF 1px 1px;*/
 }
 
 .links a:hover{
@@ -103,6 +113,22 @@ body {
 	font-size: 1.2em;
 }
 
+.versions_link {
+    text-align: center;
+    display: block;
+    margin-top: 1em;
+    color: #CCC;
+    text-decoration: none;
+    text-shadow: #FFF 1px 1px;
+}
+
+.versions_link:hover {
+    color: #0099FF;
+}
+
+/*
+ * Footer
+ */
 
 .footer p{
 	border-top: 1px solid #DDD;
@@ -125,18 +151,17 @@ body {
 	color: #0099FF;
 }
 
+/*
+ * Twitter
+ */
+
 #twits {
 	font-size: 0.8em;
-}
-
-#twits li {
-
 }
 
 .twitter{
 	clear: both;
 	background-color: #CCC;
-/*	border: 2px solid #CCC;*/
 	padding: 4px;
 	margin-top: 160px;
 }
@@ -173,7 +198,7 @@ body {
 }
 
 .twitter a:hover {
-		color: #00CEFF;
+	color: #00CEFF;
 }
 
 .twitter h5{
@@ -182,4 +207,19 @@ body {
 	background-color: #FFF;
 	margin-bottom: 3px;
 	padding: 3px;
+}
+
+/*
+ * Versions page
+ */
+ 
+.version {
+    background-color: white;
+    border: 8px solid #CCC;
+    padding: 10px;
+    margin-bottom: 1em;
+}
+
+.version .date {
+    display: block;
 }

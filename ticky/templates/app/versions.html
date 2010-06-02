@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for version in versions %}
+	
+	<div class="version">
+		<h1>Version {{version.number}}</h1>
+		{% if version.download_link %}
+			<a href="{{version.download_link}}">Download version {{version.number}}</a>
+		{% else %}
+			<em>Note: This version is not available for download (probably too old).</em>
+		{% endif %}
+		
+		<span class="date">Release date: {{version.pubdate}}</span>
+		<div class="releasenotes">
+			{{version.release_notes|safe}}
+		</div>
+	</div>
+	
+{% endfor %}
+
+{% endblock content %}
