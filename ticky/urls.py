@@ -17,4 +17,9 @@ if settings.DEBUG:
     urlpatterns += patterns('',
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}),
+    (r'^404/', 'django.views.generic.simple.direct_to_template',
+            {'template': '404.html'}),
+    (r'^500/', 'django.views.generic.simple.direct_to_template',
+            {'template': '500.html'}),
     )
+    

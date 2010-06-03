@@ -223,3 +223,21 @@ body {
 .version .date {
     display: block;
 }
+
+/*
+ * 404 page
+ */
+ 
+.p404 {
+    text-align: center;
+    text-shadow: #FFF 1px 1px;
+}
+
+.p404 a {
+    color: #0099FF;
+    text-decoration: none;
+}
+
+.p404 a:hover {
+    text-decoration: underline;
+}
